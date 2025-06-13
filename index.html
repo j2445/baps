@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Input</title>
+    <script>
+        if (sessionStorage.getItem('loggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <img src="image.png" alt="Logo" class="website-logo">
+        <h1>Yuvak Mandal Attendance Input</h1>
+        <form id="attendanceForm">
+            <div class="form-group">
+                <label>Select Yuvak:</label>
+                <div class="name-grid">
+                    <button type="button" class="name-button" data-name=" Kishan patel"> Kishan patel</button>
+                    <button type="button" class="name-button" data-name=" Dheeren patel"> Dheeren patel</button>
+                    <button type="button" class="name-button" data-name=" Neel Bhoi"> Neel Bhoi</button>
+                    <button type="button" class="name-button" data-name=" Dhruvil (boyo) patel"> Dhruvil (boyo) patel</button>
+                    <button type="button" class="name-button" data-name=" Jaydeep gohil"> Jaydeep gohil</button>
+                    <button type="button" class="name-button" data-name=" Kirtan parmar"> Kirtan parmar</button>
+                    <button type="button" class="name-button" data-name=" Meet G patel"> Meet G patel</button>
+                    <button type="button" class="name-button" data-name=" Vidur patel"> Vidur patel</button>
+                    <button type="button" class="name-button" data-name=" Dhaval Parmar"> Dhaval Parmar</button>
+                    <button type="button" class="name-button" data-name=" Jay P Patel"> Jay P Patel</button>
+                    <button type="button" class="name-button" data-name=" Dhirendra Bhai"> Dhirendra Bhai</button>
+                    <button type="button" class="name-button" data-name=" Parth patel"> Parth patel</button>
+                    <button type="button" class="name-button" data-name=" Meet s patel"> Meet s patel</button>
+                    <button type="button" class="name-button" data-name=" Jagrut patel"> Jagrut patel</button>
+                    <button type="button" class="name-button" data-name=" Manan ka. patel"> Manan ka. patel</button>
+                    <button type="button" class="name-button" data-name=" Harsh k patel (kk son)"> Harsh k patel (kk son)</button>
+                    <button type="button" class="name-button" data-name=" Parth chavda"> Parth chavda</button>
+                    <button type="button" class="name-button" data-name=" Tushar Patel"> Tushar Patel</button>
+                    <button type="button" class="name-button" data-name=" Tilak patel"> Tilak patel</button>
+                    <button type="button" class="name-button" data-name=" Joy Patel"> Joy Patel </button>
+                    <button type="button" class="name-button" data-name=" Priyesh patel"> Priyesh patel</button>
+                    <button type="button" class="name-button" data-name=" Raj patel"> Raj patel</button>
+                    <button type="button" class="name-button" data-name=" Yash patel"> Yash patel</button>
+                    <button type="button" class="name-button" data-name=" Krish patel"> Krish patel</button>
+                    <button type="button" class="name-button" data-name=" Mayank Bhai"> Mayank Bhai</button>
+                    <button type="button" class="name-button" data-name=" Lalit Bhai"> Lalit Bhai</button>
+                    <button type="button" class="name-button" data-name=" Gautam Bhai"> Gautam Bhai</button>
+                    <button type="button" class="name-button" data-name=" Tanmay Ka. Patel"> Tanmay Ka. Patel</button>
+                    <button type="button" class="name-button" data-name=" Akshay Patel"> Akshay Patel </button>
+                    <button type="button" class="name-button" data-name=" Virendra Garasiya"> Virendra Garasiya</button>
+           
+                </div>
+            </div>        
+            <button type="submit" id="submitAttendanceButton" style="display: none;">Submit Attendance</button>
+        </form>
+        <div class="action-buttons">
+            <a href="records.html" class="view-records-button">View Attendance Records</a>
+            <button id="logoutButton" class="logout-button">Logout</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
