@@ -17,7 +17,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 
     if (username === 'baps' && password === 'Baps1907') {
         // Successful login
-        sessionStorage.setItem('loggedIn', 'true');
+        localStorage.setItem('loggedIn', 'true'); // Changed from sessionStorage to localStorage
         window.location.href = 'index.html';
     } else {
         // Failed login
