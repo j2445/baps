@@ -29,19 +29,16 @@ function applyDoneClassToButtons() {
         }
     });
 }
-
 // Function to format date
 function formatDate(date) {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     return date.toLocaleDateString('en-GB', options); // DD/MM/YYYY
 }
-
 // Function to format time
 function formatTime(date) {
     const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
     return date.toLocaleTimeString('en-US', options); // HH:MM:SS AM/PM
 }
-
 // Function to count attendance by date and list names
 function countAttendanceByDate() {
     const attendanceDetails = {};
@@ -49,13 +46,11 @@ function countAttendanceByDate() {
         const [day, month, year] = record.date.split('/').map(Number);
         const recordDate = new Date(year, month - 1, day); // Month is 0-indexed
 
-        // Check if the day is Saturday (getDay() returns 6 for Saturday)
-        if (recordDate.getDay() === 6) { 
             if (!attendanceDetails[record.date]) {
                 attendanceDetails[record.date] = new Set();
             }
             attendanceDetails[record.date].add(record.name);
-        }
+
     });
 
     const sortedDates = Object.keys(attendanceDetails).sort((a, b) => {
@@ -65,10 +60,10 @@ function countAttendanceByDate() {
         return new Date(yearA, monthA - 1, dayA) - new Date(yearB, monthB - 1, dayB);
     });
 
-    let summaryHtml = '<h3>Saturday Attendance Summary</h3>';
+    let summaryHtml = '<h3>Daily Attendance Summary</h3>'; // Changed heading
     summaryHtml += '<div class="attendance-summary-list">';
     if (sortedDates.length === 0) {
-        summaryHtml += '<p>No Saturday attendance records found.</p>';
+        summaryHtml += '<p>No daily attendance records found.</p>';
     } else {
         sortedDates.forEach(date => {
             const names = Array.from(attendanceDetails[date]); // Get names for the date
@@ -88,6 +83,18 @@ function deleteRecord(index) {
     records.splice(index, 1);
     localStorage.setItem('attendanceRecords', JSON.stringify(records));
     displayRecords();
+}
+
+// Function to remove attendance
+function removeAttendance(name) {
+    records = records.filter(record => record.name !== name);
+    localStorage.setItem('attendanceRecords', JSON.stringify(records));
+    const button = document.querySelector(`.name-button[data-name="${name}"]`);
+    if (button) {
+        button.classList.remove('done');
+        button.disabled = false; // Re-enable the button
+    }
+    displayRecords(); // Update the displayed records on records.html if applicable
 }
 
 // Display existing records (only on records.html)
@@ -124,13 +131,19 @@ if (attendanceForm) {
     // Add click event listeners to name buttons
     nameButtons.forEach(button => {
         button.addEventListener('click', () => {
-            // Remove 'selected' class from previously selected button
-            nameButtons.forEach(btn => btn.classList.remove('selected'));
-            // Add 'selected' class to the clicked button
-            button.classList.add('selected');
-            selectedName = button.dataset.name;
-            // Automatically submit attendance when a name is clicked
-            submitAttendance();
+            const clickedName = button.dataset.name;
+            if (button.classList.contains('done')) {
+                // If already marked as 'done', remove attendance
+                removeAttendance(clickedName);
+                button.classList.remove('selected'); // Remove selected class if it was there
+                selectedName = ''; // Clear selected name
+            } else {
+                // Otherwise, mark attendance
+                nameButtons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+                selectedName = clickedName;
+                submitAttendance();
+            }
         });
     });
 
