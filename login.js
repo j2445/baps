@@ -15,7 +15,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         return; // Stop the login process
     }
 
-    if (username === 'baps' && password === 'baps') {
+    if (username === 'baps' && password === 'Baps1907') {
         // Successful login
         sessionStorage.setItem('loggedIn', 'true');
         window.location.href = 'index.html';
