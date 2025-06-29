@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAPS Bochasan</title>
+    <style>
+        :root {
+            --primary-color: #006633;
+            --secondary-color: #FFCC00;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Attendance Login Button in Navbar */
+        .attendance-btn {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-left: 1rem;
+            transition: all 0.3s;
+        }
+
+        .attendance-btn:hover {
+            background-color: #e6b800;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://via.placeholder.com/1920x1080') center/cover no-repeat;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #e6b800;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 0.5rem auto 0;
+        }
+
+        /* Cards Section */
+
+        .event-image,
+        .news-image {
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .event-image img,
+        .news-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-header i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .event-item,
+        .news-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .event-item:last-child,
+        .news-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .event-date {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .event-title,
+        .news-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-location,
+        .news-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .new-badge {
+            position: relative;
+            right: 10px;
+            background-color: #ff0000;
+            color: rgb(255, 255, 255);
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-item {
+            height: 150px;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .attendance-btn {
+                margin: 1rem 0;
+                width: 80%;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Baps_logo.svg" alt="BAPS Logo">
+                <span style="font-size: 0.8rem;">BAPS Shri Swaminarayan Mandir, Bochasan, India</span>
+
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#">Home</a></li>
+                <li><a href="#container">Events</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="login.html" class="attendance-btn">Attendance Login <i class="fas fa-lock"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-slider">
+            <div class="slide fade">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_011_Bochasan.jpg">
+
+            </div>
+
+            <div class="slide fade">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_057_Bochasan.jpg">
+
+            </div>
+
+            <div class="slide fade">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_066_Bochasan.jpg">
+
+            </div>
+            <div class="slide fade">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_080_Bochasan.jpg">
+
+            </div>
+
+            <!-- Navigation dots -->
+            <div class="dots">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
+        </div>
+
+        <style>
+            .hero-slider {
+                position: relative;
+                width: 100%;
+                height: 100%;
+            }
+
+            .slide {
+                display: none;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .slide img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                filter: brightness(0.6);
+            }
+
+            .hero-content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                width: 80%;
+                z-index: 2;
+            }
+
+            .fade {
+                animation: fade 1.5s ease-in-out;
+            }
+
+            @keyframes fade {
+                from {
+                    opacity: 0.4
+                }
+
+                to {
+                    opacity: 1
+                }
+            }
+
+            .dots {
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 2;
+            }
+
+            .dot {
+                cursor: pointer;
+                height: 12px;
+                width: 12px;
+                margin: 0 5px;
+                background-color: rgba(255, 255, 255, 0.5);
+                border-radius: 50%;
+                display: inline-block;
+                transition: background-color 0.3s ease;
+            }
+
+            .dot.active,
+            .dot:hover {
+                background-color: white;
+            }
+        </style>
+
+        <script>
+            let slideIndex = 1;
+            showSlides(slideIndex);
+
+            function currentSlide(n) {
+                showSlides(slideIndex = n);
+            }
+
+            function showSlides(n) {
+                let i;
+                let slides = document.getElementsByClassName("slide");
+                let dots = document.getElementsByClassName("dot");
+
+                if (n > slides.length) { slideIndex = 1 }
+                if (n < 1) { slideIndex = slides.length }
+
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " active";
+            }
+
+            // Auto advance slides
+            setInterval(function () {
+                slideIndex++;
+                showSlides(slideIndex);
+            }, 7000);
+        </script>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container" id="container">
+        <!-- Upcoming Events -->
+        <h2 class="section-title">Upcoming Events</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Events</h3>
+                </div>
+                <div class="card-body">
+                    <div class="event-item">
+                        <div class="event-image-slider">
+                            <div class="event-slide fade">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_034_Bochasan.jpg"
+                                    alt="Event Image 1">
+                            </div>
+                            <div class="event-slide fade">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_077_Bochasan.jpg"
+                                    alt="Event Image 2">
+                            </div>
+                            <div class="event-slide fade">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_080_Bochasan.jpg"
+                                    alt="Event Image 3">
+                            </div>
+
+                            <!-- Event slider navigation dots -->
+                            <div class="event-dots">
+                                <span class="event-dot" onclick="currentEventSlide(1)"></span>
+                                <span class="event-dot" onclick="currentEventSlide(2)"></span>
+                                <span class="event-dot" onclick="currentEventSlide(3)"></span>
+                            </div>
+                        </div>
+
+                        <style>
+                            .event-image-slider {
+                                position: relative;
+                                width: 100%;
+                                height: 200px;
+                                overflow: hidden;
+                            }
+
+                            .event-slide {
+                                display: none;
+                                width: 100%;
+                                height: 100%;
+                            }
+
+                            .event-slide img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+
+                            .event-dots {
+                                position: absolute;
+                                bottom: 10px;
+                                left: 50%;
+                                transform: translateX(-50%);
+                            }
+
+                            .event-dot {
+                                cursor: pointer;
+                                height: 8px;
+                                width: 8px;
+                                margin: 0 4px;
+                                background-color: rgba(255, 255, 255, 0.5);
+                                border-radius: 50%;
+                                display: inline-block;
+                                transition: background-color 0.3s ease;
+                            }
+
+                            .event-dot.active,
+                            .event-dot:hover {
+                                background-color: white;
+                            }
+                        </style>
+
+                        <script>
+                            let eventSlideIndex = 1;
+                            showEventSlides(eventSlideIndex);
+
+                            function currentEventSlide(n) {
+                                showEventSlides(eventSlideIndex = n);
+                            }
+
+                            function showEventSlides(n) {
+                                let slides = document.getElementsByClassName("event-slide");
+                                let dots = document.getElementsByClassName("event-dot");
+
+                                if (n > slides.length) { eventSlideIndex = 1 }
+                                if (n < 1) { eventSlideIndex = slides.length }
+
+                                for (let i = 0; i < slides.length; i++) {
+                                    slides[i].style.display = "none";
+                                }
+                                for (let i = 0; i < dots.length; i++) {
+                                    dots[i].className = dots[i].className.replace(" active", "");
+                                }
+
+                                slides[eventSlideIndex - 1].style.display = "block";
+                                dots[eventSlideIndex - 1].className += " active";
+                            }
+
+                            // Auto advance event slides
+                            setInterval(function () {
+                                eventSlideIndex++;
+                                showEventSlides(eventSlideIndex);
+                            }, 5000);
+                        </script>
+                        <div class="event-date">Sunday, July 21st at 4:00 PM</div>
+                        <h4 class="event-title">Guru Purnima Celebration</h4>
+                        <p class="event-location">BAPS Bochasan Mandir</p>
+                    </div>
+                    <div class="event-item">
+
+                        <div class="event-date">Every Saturday at 8:45 PM</div>
+                        <h4 class="event-title">Weekly Sabha</h4>
+                        <p class="event-location">Mandir Hall</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Latest News -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-newspaper"></i>
+                    <h3>News</h3>
+                </div>
+                <div class="card-body">
+
+                    <div class="news-item">
+                        <span class="new-badge">New</span>
+                        <h4 class="news-title">Mahant Swami Maharaj's Divine Visit - (5th July)</h4>
+                        <p class="news-desc">Experience the divine blessings of Mahant Swami Maharaj at Bochasan Mandir
+                            on 5th July. Special sabha at 7:00 PM followed by darshan. All devotees are cordially
+                            invited.</p>
+                    </div>
+                    <div class="news-item">
+                        <h4 class="news-title">Mandir Cleaning Seva Completed</h4>
+                        <p class="news-desc">Over 50 yuvaks joined hands last week to clean the entire mandir premises
+                            with great devotion and joy.</p>
+                    </div>
+                    <div class="news-item">
+                        <h4 class="news-title">Yuvak Shibir Announced</h4>
+                        <p class="news-desc">Join us for a spiritual retreat on August 10th–11th at Anand Vidhyapith.
+                            Contact Karyakar for registration.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery -->
+        <h2 class="section-title" id="gallery">Mandir Gallery</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://www.baps.org//Data/Sites/1/Media/LocationImages/128128-bochasan.jpg">
+            </div>
+            <div class="gallery-item">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_001_Bochasan.jpg">
+            </div>
+            <div class="gallery-item">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_002_Bochasan.jpg">
+            </div>
+            <div class="gallery-item">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_003_Bochasan.jpg">
+            </div>
+            <div class="gallery-item">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_005_Bochasan.jpg">
+            </div>
+            <div class="gallery-item">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_006_Bochasan.jpg">
+            </div>
+
+            <div class="gallery-item">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_010_Bochasan.jpg">
+            </div>
+            <div class="gallery-item">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_024_Bochasan.jpg">
+            </div>
+            <div class="gallery-item">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_028_Bochasan.jpg">
+            </div>
+            <div class="gallery-item">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_043_Bochasan.jpg">
+            </div>
+            <div class="gallery-item">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_32.jpg">
+            </div>
+            <div class="gallery-item">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_73.jpg">
+            </div>
+            <div class="gallery-item">
+                <img
+                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_085_Bochasan.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="footer-art">
+        <img src="https://akshardham.com/newdelhi/wp-content/uploads/2015/04/footer_art_homepage.png"
+            alt="Footer Decorative Art" style="width: 100%; height: auto; display: block;">
+    </div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+
+
+            <h3>BAPS Shri Swaminarayan Mandir, Bochasan, India</h3>
+
+            <div class="social-links">
+                <a href="https://www.facebook.com/bapsswaminarayansanstha"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/baps/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/user/BAPSChannel"><i class="fab fa-youtube"></i></a>
+
+            </div>
+            <p>&copy; 1999-2025 Bochasanwasi Shri Akshar Purushottam Swaminarayan Sanstha (BAPS Swaminarayan Sanstha).
+                All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>
