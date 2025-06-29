@@ -271,6 +271,7 @@
             overflow: hidden;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
         }
 
         .gallery-item img {
@@ -305,6 +306,103 @@
             color: white;
             margin: 0 10px;
             font-size: 1.5rem;
+        }
+
+        /* Image Popup Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .modal-content, #caption {
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @keyframes zoom {
+            from {transform: translate(-50%, -50%) scale(0.1)}
+            to {transform: translate(-50%, -50%) scale(1)}
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            z-index: 2001;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--secondary-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Navigation arrows for modal */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 30px;
+            transition: 0.3s;
+            user-select: none;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: 2001;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev {
+            left: 0;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
         }
 
         /* Mobile Styles */
@@ -351,6 +449,22 @@
             .cards {
                 grid-template-columns: 1fr;
             }
+
+            .modal-content {
+                max-width: 95%;
+                max-height: 80%;
+            }
+
+            .close {
+                top: 10px;
+                right: 20px;
+                font-size: 30px;
+            }
+
+            .prev, .next {
+                padding: 10px;
+                font-size: 20px;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -363,7 +477,6 @@
             <div class="logo">
                 <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Baps_logo.svg" alt="BAPS Logo">
                 <span style="font-size: 0.8rem;">BAPS Shri Swaminarayan Mandir, Bochasan, India</span>
-
             </div>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
@@ -381,26 +494,18 @@
     <section class="hero" id="hero">
         <div class="hero-slider">
             <div class="slide fade">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_011_Bochasan.jpg">
-
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_011_Bochasan.jpg">
             </div>
 
             <div class="slide fade">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_057_Bochasan.jpg">
-
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_057_Bochasan.jpg">
             </div>
 
             <div class="slide fade">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_066_Bochasan.jpg">
-
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_066_Bochasan.jpg">
             </div>
             <div class="slide fade">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_080_Bochasan.jpg">
-
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_080_Bochasan.jpg">
             </div>
 
             <!-- Navigation dots -->
@@ -431,7 +536,7 @@
             .slide img {
                 width: 100%;
                 height: 100%;
-                object-fit: cover;
+                object-fit: contain;
                 filter: brightness(0.6);
             }
 
@@ -522,12 +627,38 @@
     <!-- Main Content -->
     <div class="container" id="container">
         <!-- Upcoming Events -->
-        <h2 class="section-title">Upcoming Events</h2>
+        <h2 class="section-title">Events</h2>
         <div class="cards">
+            
+
+            <!-- Latest News -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-newspaper"></i>
+                    <h3>Updates</h3>
+                </div>
+                <div class="card-body">
+                    <div class="news-item">
+                        <span class="new-badge">New </span>
+                        <div class="news-image">
+                            <img src="utsav.jpg" alt="Utsav Photo" style="width: auto; height:auto; max-width: 100%; object-fit: contain;">
+                        </div>
+                        <div class="news-image">
+                            <img src="dates.jpg" alt="Dates Photo" style="width: auto; height: auto; max-width: 100%; object-fit: contain;">
+                        </div>
+                        
+                        <h4 class="news-title">Mahant Swami Maharaj's Divine Visit - (5th July)</h4>
+                        <p class="news-desc">Experience the divine blessings of Mahant Swami Maharaj at Bochasan Mandir
+                            on 5th July. Special sabha at 7:00 PM followed by darshan. All devotees are cordially
+                            invited.</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-calendar-alt"></i>
-                    <h3>Events</h3>
+                    <h3>Past Events</h3>
                 </div>
                 <div class="card-body">
                     <div class="event-item">
@@ -556,8 +687,8 @@
                         <style>
                             .event-image-slider {
                                 position: relative;
-                                width: 100%;
-                                height: 200px;
+                                width: auto;
+                                height: auto;
                                 overflow: hidden;
                             }
 
@@ -570,7 +701,7 @@
                             .event-slide img {
                                 width: 100%;
                                 height: 100%;
-                                object-fit: cover;
+                                object-fit: contain;
                             }
 
                             .event-dots {
@@ -634,45 +765,158 @@
                         <p class="event-location">BAPS Bochasan Mandir</p>
                     </div>
                     <div class="event-item">
-
                         <div class="event-date">Every Saturday at 8:45 PM</div>
                         <h4 class="event-title">Weekly Sabha</h4>
                         <p class="event-location">Mandir Hall</p>
                     </div>
-                </div>
-            </div>
-
-            <!-- Latest News -->
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-newspaper"></i>
-                    <h3>News</h3>
-                </div>
-                <div class="card-body">
-
-                    <div class="news-item">
-                        <div class="news-image">
-                            <img src="utsav.jpg" alt="Utsav Photo" style="width: auto; height:auto; max-width: 100%; object-fit: contain;">
+                    <div class="timings-container">
+                        <h2 class="section-title">Mandir Timings</h2>
+                        
+                        <div class="timings-grid">
+                            <div class="timing-card">
+                                <div class="timing-card-header">
+                                    <i class="fas fa-door-open"></i>
+                                    <h3>Darshan Timings</h3>
+                                </div>
+                                <div class="timing-card-body">
+                                    <table class="timings-table">
+                                        <tr>
+                                            <td>Morning</td>
+                                            <td>07:30 – 10:15 am</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Closed</td>
+                                            <td>10:15 – 11:15 am (Rajbhog Thal)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Noon</td>
+                                            <td>11:15 – 12:00 pm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Afternoon</td>
+                                            <td>12:00 – 04:00 pm (Closed)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Evening</td>
+                                            <td>04:00 – 06:00 pm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Closed</td>
+                                            <td>06:00 – 07:00 pm (Thal)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Night</td>
+                                            <td>07:00 – 08:15 pm</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div class="timing-card">
+                                <div class="timing-card-header">
+                                    <i class="fas fa-bell"></i>
+                                    <h3>Aarti Timings</h3>
+                                </div>
+                                <div class="timing-card-body">
+                                    <table class="timings-table">
+                                        <tr>
+                                            <td>Mangla Aarti</td>
+                                            <td>6:00 am</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shangar Aarti</td>
+                                            <td>7:30 am</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Rajbhog Aarti</td>
+                                            <td>11:15 am</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sandhya Aarti</td>
+                                            <td>7:00 pm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shayan Aarti</td>
+                                            <td>8:15 pm</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                        <div class="news-image">
-                            <img src="dates.jpg" alt="Dates Photo" style="width: auto; height: auto; max-width: 100%; object-fit: contain;">
-                        </div>
-                        <span class="new-badge">New</span>
-                        <h4 class="news-title">Mahant Swami Maharaj's Divine Visit - (5th July)</h4>
-                        <p class="news-desc">Experience the divine blessings of Mahant Swami Maharaj at Bochasan Mandir
-                            on 5th July. Special sabha at 7:00 PM followed by darshan. All devotees are cordially
-                            invited.</p>
                     </div>
-                    <div class="news-item">
-                        <h4 class="news-title">Mandir Cleaning Seva Completed</h4>
-                        <p class="news-desc">Over 50 yuvaks joined hands last week to clean the entire mandir premises
-                            with great devotion and joy.</p>
-                    </div>
-                    <div class="news-item">
-                        <h4 class="news-title">Yuvak Shibir Announced</h4>
-                        <p class="news-desc">Join us for a spiritual retreat on August 10th–11th at Anand Vidhyapith.
-                            Contact Karyakar for registration.</p>
-                    </div>
+                    
+                    <style>
+                        .timings-container {
+                            max-width: 1200px;
+                            margin: 2rem auto;
+                            padding: 0 1rem;
+                        }
+                        
+                        .timings-grid {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                            gap: 2rem;
+                        }
+                        
+                        .timing-card {
+                            background-color: white;
+                            border-radius: 8px;
+                            overflow: hidden;
+                            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                            transition: transform 0.3s;
+                        }
+                        
+                        .timing-card:hover {
+                            transform: translateY(-5px);
+                        }
+                        
+                        .timing-card-header {
+                            background-color: var(--primary-color);
+                            color: white;
+                            padding: 1rem;
+                            display: flex;
+                            align-items: center;
+                        }
+                        
+                        .timing-card-header i {
+                            margin-right: 10px;
+                            font-size: 1.2rem;
+                        }
+                        
+                        .timing-card-body {
+                            padding: 1.5rem;
+                        }
+                        
+                        .timings-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+                        
+                        .timings-table tr {
+                            border-bottom: 1px solid #eee;
+                        }
+                        
+                        .timings-table tr:last-child {
+                            border-bottom: none;
+                        }
+                        
+                        .timings-table td {
+                            padding: 0.75rem 0;
+                            vertical-align: top;
+                        }
+                        
+                        .timings-table td:first-child {
+                            font-weight: 600;
+                            color: var(--primary-color);
+                            width: 40%;
+                        }
+                        
+                        @media (max-width: 768px) {
+                            .timings-grid {
+                                grid-template-columns: 1fr;
+                            }
+                        }
+                    </style>
                 </div>
             </div>
         </div>
@@ -684,72 +928,66 @@
                 <img src="https://www.baps.org//Data/Sites/1/Media/LocationImages/128128-bochasan.jpg">
             </div>
             <div class="gallery-item">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_001_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_001_Bochasan.jpg">
             </div>
             <div class="gallery-item">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_002_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_002_Bochasan.jpg">
             </div>
             <div class="gallery-item">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_003_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_003_Bochasan.jpg">
             </div>
             <div class="gallery-item">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_005_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_005_Bochasan.jpg">
             </div>
             <div class="gallery-item">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_006_Bochasan.jpg">
-            </div>
-
-            <div class="gallery-item">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_010_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_006_Bochasan.jpg">
             </div>
             <div class="gallery-item">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_024_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_010_Bochasan.jpg">
             </div>
             <div class="gallery-item">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_028_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_024_Bochasan.jpg">
             </div>
             <div class="gallery-item">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_043_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_028_Bochasan.jpg">
             </div>
             <div class="gallery-item">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_32.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_043_Bochasan.jpg">
             </div>
             <div class="gallery-item">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_73.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_32.jpg">
             </div>
             <div class="gallery-item">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_085_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_73.jpg">
+            </div>
+            <div class="gallery-item">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_085_Bochasan.jpg">
             </div>
         </div>
     </div>
+
+    <!-- Image Popup Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+        <span class="next" onclick="changeImage(1)">&#10095;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="caption"></div>
+    </div>
+
     <div class="footer-art">
         <img src="https://akshardham.com/newdelhi/wp-content/uploads/2015/04/footer_art_homepage.png"
             alt="Footer Decorative Art" style="width: 100%; height: auto; display: block;">
     </div>
+    
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-
-
             <h3>BAPS Shri Swaminarayan Mandir, Bochasan, India</h3>
-
             <div class="social-links">
                 <a href="https://www.facebook.com/bapsswaminarayansanstha"><i class="fab fa-facebook"></i></a>
                 <a href="https://www.instagram.com/baps/"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/user/BAPSChannel"><i class="fab fa-youtube"></i></a>
-
             </div>
             <p>&copy; 1999-2025 Bochasanwasi Shri Akshar Purushottam Swaminarayan Sanstha (BAPS Swaminarayan Sanstha).
                 All Rights Reserved.</p>
@@ -764,7 +1002,64 @@
         mobileMenuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
+
+        // Image Modal functionality
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        const captionText = document.getElementById("caption");
+        const closeBtn = document.getElementsByClassName("close")[0];
+        const galleryItems = document.querySelectorAll(".gallery-item img");
+        let currentImageIndex = 0;
+
+        // Open modal when clicking on gallery image
+        galleryItems.forEach((img, index) => {
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+                currentImageIndex = index;
+            }
+        });
+
+        // Close modal
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Close when clicking outside the image
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Navigate between images
+        function changeImage(n) {
+            currentImageIndex += n;
+            
+            // Wrap around if at beginning or end
+            if (currentImageIndex >= galleryItems.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = galleryItems.length - 1;
+            }
+            
+            modalImg.src = galleryItems[currentImageIndex].src;
+            captionText.innerHTML = galleryItems[currentImageIndex].alt;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (modal.style.display === "block") {
+                if (event.key === "ArrowLeft") {
+                    changeImage(-1);
+                } else if (event.key === "ArrowRight") {
+                    changeImage(1);
+                } else if (event.key === "Escape") {
+                    modal.style.display = "none";
+                }
+            }
+        });
     </script>
 </body>
-
 </html>
