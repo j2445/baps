@@ -24,7 +24,7 @@
 
         body {
             background-color: #ffffff;
-            
+
         }
 
         /* Navbar Styles */
@@ -128,44 +128,7 @@
             transform: translateY(-2px);
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://via.placeholder.com/1920x1080') center/cover no-repeat;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding: 0 1rem;
-        }
-
-        .hero-content h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #e6b800;
-            transform: translateY(-2px);
-        }
+     
 
         /* Main Content */
         .container {
@@ -602,14 +565,6 @@
 
 
 
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-
-            .hero-content p {
-                font-size: 1rem;
-            }
-
             .cards {
                 grid-template-columns: 1fr;
             }
@@ -658,146 +613,75 @@
     <!-- Menu overlay -->
     <div class="menu-overlay" id="menuOverlay"></div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-slider">
-            <div class="slide fade">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_011_Bochasan.jpg">
-            </div>
-
-            <div class="slide fade">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_057_Bochasan.jpg">
-            </div>
-
-            <div class="slide fade">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_066_Bochasan.jpg">
-            </div>
-            <div class="slide fade">
-                <img
-                    src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_080_Bochasan.jpg">
-            </div>
-
-            <!-- Navigation dots -->
-            <div class="dots">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-                <span class="dot" onclick="currentSlide(4)"></span>
-            </div>
+  
+<!-- Hero Section - Images Only -->
+<section class="hero" id="hero">
+    <div class="hero-slider">
+        <div class="slide">
+            <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_011_Bochasan.jpg" alt="Bochasan Mandir">
         </div>
+        <div class="slide">
+            <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_057_Bochasan.jpg" alt="Bochasan Mandir">
+        </div>
+        <div class="slide">
+            <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_066_Bochasan.jpg" alt="Bochasan Mandir">
+        </div>
+        <div class="slide">
+            <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_080_Bochasan.jpg" alt="Bochasan Mandir">
+        </div>
+    </div>
+</section>
 
+<style>
+    .hero {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    .hero-slider {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1.5s ease-in-out;
+    }
+    
+    .slide.active {
+        opacity: 1;
+    }
+    
+    .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
 
-
-        <style>
-            .hero-slider {
-                position: relative;
-                width: 100%;
-                height: 100%;
-            }
-
-            .slide {
-                display: none;
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-
-            .slide img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                filter: brightness(0.6);
-            }
-
-            .hero-content {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                width: 80%;
-                z-index: 2;
-            }
-
-            .fade {
-                animation: fade 1.5s ease-in-out;
-            }
-
-            @keyframes fade {
-                from {
-                    opacity: 0.4
-                }
-
-                to {
-                    opacity: 1
-                }
-            }
-
-            .dots {
-                position: absolute;
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                z-index: 2;
-            }
-
-            .dot {
-                cursor: pointer;
-                height: 12px;
-                width: 12px;
-                margin: 0 5px;
-                background-color: rgba(255, 255, 255, 0.5);
-                border-radius: 50%;
-                display: inline-block;
-                transition: background-color 0.3s ease;
-            }
-
-            .dot.active,
-            .dot:hover {
-                background-color: white;
-            }
-        </style>
-
-        <script>
-            let slideIndex = 1;
-            showSlides(slideIndex);
-
-            function currentSlide(n) {
-                showSlides(slideIndex = n);
-            }
-
-            function showSlides(n) {
-                let i;
-                let slides = document.getElementsByClassName("slide");
-                let dots = document.getElementsByClassName("dot");
-
-                if (n > slides.length) { slideIndex = 1 }
-                if (n < 1) { slideIndex = slides.length }
-
-                for (i = 0; i < slides.length; i++) {
-                    slides[i].style.display = "none";
-                }
-                for (i = 0; i < dots.length; i++) {
-                    dots[i].className = dots[i].className.replace(" active", "");
-                }
-
-                slides[slideIndex - 1].style.display = "block";
-                dots[slideIndex - 1].className += " active";
-            }
-
-            // Auto advance slides
-            setInterval(function () {
-                slideIndex++;
-                showSlides(slideIndex);
-            }, 4000);
-        </script>
-
-
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        
+        // Show first slide immediately
+        slides[currentSlide].classList.add('active');
+        
+        function showNextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        // Auto-advance every 5 seconds
+        setInterval(showNextSlide, 5000);
+    });
+</script>
 
 
     </section>
@@ -953,7 +837,7 @@
                         <p class="event-location">Mandir Hall</p>
                     </div>
 
-                    
+
                     <div class="timings-container">
                         <h2 class="section-title">Mandir Timings</h2>
 
