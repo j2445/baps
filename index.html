@@ -614,7 +614,7 @@
     <div class="menu-overlay" id="menuOverlay"></div>
 
   
-<!-- Hero Section - Images Only -->
+    <!-- Hero Section - Full Images Without Cropping -->
 <section class="hero" id="hero">
     <div class="hero-slider">
         <div class="slide">
@@ -638,19 +638,26 @@
         height: 100vh;
         width: 100%;
         overflow: hidden;
+        background-color: #361e1e75; /* Fallback background */
     }
     
     .hero-slider {
         width: 100%;
         height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .slide {
         position: absolute;
-        width: 100%;
-        height: 100%;
+        width: auto;
+        height: auto;
         opacity: 0;
         transition: opacity 1.5s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .slide.active {
@@ -658,9 +665,27 @@
     }
     
     .slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* For very tall screens (mobile) */
+    @media (max-aspect-ratio: 3/4) {
+        .slide img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    /* For very wide screens (desktop) */
+    @media (min-aspect-ratio: 4/3) {
+        .slide img {
+            width: auto;
+            height: 100%;
+        }
     }
 </style>
 
@@ -668,21 +693,42 @@
     document.addEventListener('DOMContentLoaded', function() {
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
+        let slideInterval;
         
-        // Show first slide immediately
-        slides[currentSlide].classList.add('active');
-        
-        function showNextSlide() {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
+        function initSlider() {
+            // Show first slide immediately
             slides[currentSlide].classList.add('active');
+            
+            function showNextSlide() {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+            
+            // Auto-advance every 5 seconds
+            slideInterval = setInterval(showNextSlide, 5000);
         }
         
-        // Auto-advance every 5 seconds
-        setInterval(showNextSlide, 5000);
+        // Wait for images to load before initializing slider
+        const images = document.querySelectorAll('.slide img');
+        let loadedImages = 0;
+        
+        images.forEach(img => {
+            if (img.complete) {
+                imageLoaded();
+            } else {
+                img.addEventListener('load', imageLoaded);
+            }
+        });
+        
+        function imageLoaded() {
+            loadedImages++;
+            if (loadedImages === images.length) {
+                initSlider();
+            }
+        }
     });
 </script>
-
 
     </section>
 
