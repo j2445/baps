@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yuvak Mandal Attendance</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/4/4a/Baps_logo.svg" type="image/svg+xml">
   <script>
     if (sessionStorage.getItem("loggedIn") !== "true") {
       window.location.href = "login.html";
@@ -37,6 +38,7 @@
       text-align: center;
       transition: 0.3s ease;
       font-size: 0.95em;
+      position: relative;
     }
     .name-button:hover:not(.done):not(.selected) {
       background-color: #dcdcdc;
@@ -51,19 +53,40 @@
       color: white;
       cursor: not-allowed;
     }
-    #markPresentButton {
+    .name-button.aarti {
+      background-color: #f39c12;
+      color: white;
+    }
+    .name-button.both {
+      background: linear-gradient(135deg, #2ecc71 50%, #f39c12 50%);
+      color: white;
+    }
+    .attendance-buttons {
+      display: flex;
+      gap: 10px;
       margin-top: 15px;
-      background-color: #2ecc71;
-      width: 100%;
+    }
+    .attendance-buttons button {
+      flex: 1;
       font-weight: bold;
       font-size: 1.1em;
       padding: 12px;
       border: none;
       color: white;
       border-radius: 6px;
+      cursor: pointer;
+    }
+    #markPresentButton {
+      background-color: #2ecc71;
     }
     #markPresentButton:hover {
       background-color: #27ae60;
+    }
+    #markAartiButton {
+      background-color: #f39c12;
+    }
+    #markAartiButton:hover {
+      background-color: #e67e22;
     }
     .bottom-controls, .action-buttons {
       margin-top: 20px;
@@ -104,6 +127,24 @@
       margin-top: 15px;
       text-align: center;
     }
+    .tabs {
+      display: flex;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ccc;
+    }
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: #f1f1f1;
+      border: 1px solid #ccc;
+      border-bottom: none;
+      border-radius: 5px 5px 0 0;
+      margin-right: 5px;
+    }
+    .tab.active {
+      background-color: #3498db;
+      color: white;
+    }
     @media (max-width: 600px) {
       h1 {
         font-size: 1.5em;
@@ -116,25 +157,25 @@
 
     /* Modal Styles */
     .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
+      display: none;
+      position: fixed;
+      z-index: 1;
       left: 0;
       top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
       justify-content: center;
       align-items: center;
     }
 
     .modal-content {
       background-color: #fefefe;
-      margin: auto; /* Center the modal */
+      margin: auto;
       padding: 20px;
       border: 1px solid #888;
-      width: 80%; /* Could be more or less, depending on screen size */
+      width: 80%;
       max-width: 400px;
       border-radius: 8px;
       text-align: center;
@@ -164,12 +205,22 @@
     <img src="image.png" alt="Logo" class="website-logo" style="max-width: 300px; display: block; margin: auto;" />
     <h1 style="text-align:center">Yuvak Mandal Attendance</h1>
 
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('sabha')">Sabha Attendance</div>
+      <div class="tab" onclick="showTab('aarti')">Aarti Attendance</div>
+    </div>
+
     <div class="search-container">
       <input type="text" id="searchInput" placeholder="Search Yuvak..." oninput="renderNames()" />
     </div>
 
     <div class="form-group">
       <div class="name-grid" id="nameGrid"></div>
+    </div>
+
+    <div class="attendance-buttons">
+      <button id="markPresentButton" onclick="markPresent()">Mark Sabha Present</button>
+      <button id="markAartiButton" onclick="markAarti()">Mark Aarti Present</button>
     </div>
 
     <div class="action-buttons">
@@ -203,21 +254,29 @@
     ];
 
     let names = JSON.parse(localStorage.getItem('yuvakNames')) || defaultNames;
-
     let selectedIndex = -1;
     let selectedName = '';
-    let records = JSON.parse(localStorage.getItem("attendanceRecords")) || [];
+    let currentTab = 'sabha';
+    
+    // Load attendance records
+    let sabhaRecords = JSON.parse(localStorage.getItem("sabhaAttendanceRecords")) || [];
+    let aartiRecords = JSON.parse(localStorage.getItem("aartiAttendanceRecords")) || [];
+    
     const today = formatDate(new Date());
 
+    // Reset records if it's a new day
     if (localStorage.getItem('lastAttendanceDate') !== today) {
-      records = [];
-      localStorage.removeItem("attendanceRecords");
+      sabhaRecords = [];
+      aartiRecords = [];
+      localStorage.removeItem("sabhaAttendanceRecords");
+      localStorage.removeItem("aartiAttendanceRecords");
     }
     localStorage.setItem("lastAttendanceDate", today);
 
     function formatDate(date) {
       return date.toLocaleDateString('en-GB');
     }
+    
     function formatTime(date) {
       return date.toLocaleTimeString('en-US');
     }
@@ -226,127 +285,129 @@
       localStorage.setItem('yuvakNames', JSON.stringify(names));
     }
 
+    function showTab(tabName) {
+      currentTab = tabName;
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.toggle('active', tab.textContent.toLowerCase().includes(tabName));
+      });
+      renderNames();
+    }
 
     function renderNames() {
       const grid = document.getElementById("nameGrid");
       const search = document.getElementById("searchInput").value.toLowerCase();
       grid.innerHTML = "";
+      
       names.forEach((name, index) => {
         if (name.toLowerCase().includes(search)) {
           const btn = document.createElement("button");
           btn.className = "name-button";
           btn.textContent = `${index + 1}. ${name}`;
           btn.dataset.name = name;
-          if (records.some(r => r.name === name && r.date === today)) {
+          
+          // Check attendance status
+          const isSabhaPresent = sabhaRecords.some(r => r.name === name && r.date === today);
+          const isAartiPresent = aartiRecords.some(r => r.name === name && r.date === today);
+          
+          if (isSabhaPresent && isAartiPresent) {
+            btn.classList.add("both");
+          } else if (isSabhaPresent) {
             btn.classList.add("done");
-            btn.disabled = true;
+          } else if (isAartiPresent) {
+            btn.classList.add("aarti");
           }
+          
           if (index === selectedIndex) {
             btn.classList.add("selected");
           }
+          
           btn.onclick = () => {
-            if (!btn.classList.contains("done")) {
+            if (!(isSabhaPresent && isAartiPresent)) {
               selectedIndex = index;
               selectedName = name;
               renderNames();
             }
           };
+          
           btn.ondblclick = () => {
-            if (!btn.classList.contains("done")) {
-              markNamePresent(name);
+            if (!(isSabhaPresent && isAartiPresent)) {
+              if (currentTab === 'sabha') {
+                markNamePresent(name, 'sabha');
+              } else {
+                markNamePresent(name, 'aarti');
+              }
             }
           };
+          
           grid.appendChild(btn);
         }
       });
     }
 
-    function markNamePresent(nameToMark) {
+    function markNamePresent(nameToMark, type) {
       const now = new Date();
       const attendanceEntry = {
         name: nameToMark,
         date: today,
         time: formatTime(now),
+        type: type
       };
 
-      if (!records.some(r => r.name === nameToMark && r.date === today)) {
-        records.push(attendanceEntry);
-        localStorage.setItem("attendanceRecords", JSON.stringify(records));
-        renderNames(); // Re-render to update the button state
-        showModal(`${nameToMark} marked present!`);
-      } else {
-        showModal(`${nameToMark} is already marked present for today.`);
+      if (type === 'sabha') {
+        if (!sabhaRecords.some(r => r.name === nameToMark && r.date === today)) {
+          sabhaRecords.push(attendanceEntry);
+          localStorage.setItem("sabhaAttendanceRecords", JSON.stringify(sabhaRecords));
+          showModal(`${nameToMark} marked present for sabha!`);
+        } else {
+          showModal(`${nameToMark} is already marked present for sabha today.`);
+        }
+      } else if (type === 'aarti') {
+        if (!aartiRecords.some(r => r.name === nameToMark && r.date === today)) {
+          aartiRecords.push(attendanceEntry);
+          localStorage.setItem("aartiAttendanceRecords", JSON.stringify(aartiRecords));
+          showModal(`${nameToMark} marked present for aarti!`);
+        } else {
+          showModal(`${nameToMark} is already marked present for aarti today.`);
+        }
       }
+      
+      renderNames();
     }
 
     function markPresent() {
       if (selectedName) {
-        markNamePresent(selectedName);
+        markNamePresent(selectedName, 'sabha');
       } else {
         showModal("Please select a Yuvak first.");
       }
     }
 
-    // Removed: document.getElementById("markPresentButton").addEventListener("click", () => {
-    // Removed:   if (!selectedName) return showModal("Please select a Yuvak.");
-    // Removed:   const now = new Date();
-    // Removed:   records.push({ name: selectedName, date: formatDate(now), time: formatTime(now) });
-    // Removed:   localStorage.setItem("attendanceRecords", JSON.stringify(records));
-    // Removed:   selectedIndex = -1;
-    // Removed:   selectedName = '';
-    // Removed:   renderNames();
-    // Removed: });
-
-    function addName() {
-      const input = document.getElementById("newNameInput");
-      const name = input.value.trim();
-      if (!name) return showModal("Enter a name.");
-      names.push(name);
-      input.value = "";
-      renderNames();
-    }
-    function editSelectedName() {
-      const input = document.getElementById("newNameInput");
-      const name = input.value.trim();
-      if (selectedIndex === -1 || !name) return showModal("Select and enter a new name.");
-      names[selectedIndex] = name;
-      selectedIndex = -1;
-      selectedName = '';
-      input.value = "";
-      renderNames();
-    }
-    function removeSelectedName() {
-      if (selectedIndex === -1) return showModal("Select a name to remove.");
-      if (confirm(`Remove "${names[selectedIndex]}"?`)) {
-        names.splice(selectedIndex, 1);
-        selectedIndex = -1;
-        selectedName = '';
-        renderNames();
+    function markAarti() {
+      if (selectedName) {
+        markNamePresent(selectedName, 'aarti');
+      } else {
+        showModal("Please select a Yuvak first.");
       }
     }
+
     document.getElementById("logoutButton").addEventListener("click", () => {
       sessionStorage.removeItem("loggedIn");
       window.location.href = "index.html";
     });
 
-    // Get the modal
+    // Modal functionality
     var modal = document.getElementById("myModal");
-
-    // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close-button")[0];
 
-    // Function to display the modal
     function showModal(message) {
       document.getElementById("modalMessage").textContent = message;
-      modal.style.display = "flex"; // Use flex to center content
+      modal.style.display = "flex";
     }
 
-    // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
       modal.style.display = "none";
     }
 
-    // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
       if (event.target == modal) {
         modal.style.display = "none";
