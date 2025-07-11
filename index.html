@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BAPS Shri Swaminarayan Mandir - Bochasan</title>
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/4/4a/Baps_logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
         :root {
             --primary-dark: #0a0a0a;
@@ -48,16 +51,29 @@
             height: 100%;
             z-index: -1;
             background: radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
             animation: backgroundShift 20s ease-in-out infinite;
         }
 
         @keyframes backgroundShift {
-            0%, 100% { transform: translateX(0) translateY(0); }
-            25% { transform: translateX(-20px) translateY(-10px); }
-            50% { transform: translateX(20px) translateY(10px); }
-            75% { transform: translateX(-10px) translateY(20px); }
+
+            0%,
+            100% {
+                transform: translateX(0) translateY(0);
+            }
+
+            25% {
+                transform: translateX(-20px) translateY(-10px);
+            }
+
+            50% {
+                transform: translateX(20px) translateY(10px);
+            }
+
+            75% {
+                transform: translateX(-10px) translateY(20px);
+            }
         }
 
         /* Floating Particles */
@@ -86,12 +102,15 @@
                 transform: translateY(100vh) rotate(0deg);
                 opacity: 0;
             }
+
             10% {
                 opacity: 0.6;
             }
+
             90% {
                 opacity: 0.6;
             }
+
             100% {
                 transform: translateY(-100px) rotate(360deg);
                 opacity: 0;
@@ -136,13 +155,18 @@
         .logo-img {
             width: 50px;
             height: 50px;
-            filter: drop-shadow(0 0 10px var(--accent-gold));
+            filter: brightness(0) invert(1) drop-shadow(0 0 10px var(--text-light));
             animation: logoGlow 3s ease-in-out infinite alternate;
         }
 
         @keyframes logoGlow {
-            from { filter: drop-shadow(0 0 10px var(--accent-gold)); }
-            to { filter: drop-shadow(0 0 20px var(--accent-gold)) drop-shadow(0 0 30px var(--accent-amber)); }
+            from {
+                filter: brightness(0) invert(1) drop-shadow(0 0 10px var(--text-light));
+            }
+
+            to {
+                filter: brightness(0) invert(1) drop-shadow(0 0 20px var(--text-light)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.7));
+            }
         }
 
         .logo-text h1 {
@@ -199,40 +223,46 @@
         }
 
         .attendance-btn {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: linear-gradient(135deg, var(--glass-bg), rgba(255, 255, 255, 0.1));
+            border: 2px solid var(--glass-border);
             color: var(--text-light);
-            padding: 0.75rem 1.5rem;
+            padding: 0.85rem 2rem;
             border-radius: 50px;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: none;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .attendance-btn::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
             background: var(--gradient-primary);
-            transition: left 0.3s ease;
+            transform: translate(-50%, -50%) scale(0);
+            border-radius: 50%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: -1;
-        }
-
-        .attendance-btn:hover::before {
-            left: 0;
         }
 
         .attendance-btn:hover {
             color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+            border-color: var(--accent-gold);
         }
+
+        .attendance-btn:active {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
 
         .mobile-menu-btn {
             display: none;
@@ -282,8 +312,13 @@
         }
 
         @keyframes titleGlow {
-            from { text-shadow: 0 0 30px rgba(255, 215, 0, 0.3); }
-            to { text-shadow: 0 0 50px rgba(255, 215, 0, 0.6), 0 0 70px rgba(255, 140, 0, 0.4); }
+            from {
+                text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            }
+
+            to {
+                text-shadow: 0 0 50px rgba(255, 215, 0, 0.6), 0 0 70px rgba(255, 140, 0, 0.4);
+            }
         }
 
         .hero-subtitle {
@@ -385,9 +420,22 @@
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
         }
 
         /* Main Content */
@@ -559,27 +607,49 @@
             filter: brightness(0.8) contrast(1.1);
         }
 
-        /* Gallery with 3D Effects */
+        /* Gallery */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-            
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem;
         }
 
         .gallery-item {
+            position: relative;
             aspect-ratio: 1;
             border-radius: 15px;
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.4s ease;
-            transform-style: preserve-3d;
-            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
         }
 
         .gallery-item:hover {
-            transform: rotateY(10deg) rotateX(5deg) scale(1.05);
-            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(1.1) contrast(1.1);
         }
 
         .gallery-item img {
@@ -587,28 +657,11 @@
             height: 100%;
             object-fit: cover;
             transition: all 0.4s ease;
-            filter: brightness(0.9) contrast(1.1);
+            filter: brightness(0.95) contrast(1.05);
+            transform: scale(1);
         }
 
-        .gallery-item:hover img {
-            filter: brightness(1.1) contrast(1.2);
-        }
 
-        .gallery-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-item:hover::after {
-            opacity: 1;
-        }
 
         /* Advanced Modal */
         .modal {
@@ -631,8 +684,13 @@
         }
 
         @keyframes modalFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .modal-content {
@@ -643,8 +701,15 @@
         }
 
         @keyframes modalSlideIn {
-            from { transform: scale(0.8) translateY(50px); opacity: 0; }
-            to { transform: scale(1) translateY(0); opacity: 1; }
+            from {
+                transform: scale(0.8) translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
         }
 
         .modal-image {
@@ -710,8 +775,13 @@
             transform: translateY(-50%) scale(1.1);
         }
 
-        .modal-prev { left: 2rem; }
-        .modal-next { right: 2rem; }
+        .modal-prev {
+            left: 2rem;
+        }
+
+        .modal-next {
+            right: 2rem;
+        }
 
         /* Timing Cards */
         .timing-card {
@@ -791,8 +861,13 @@
         }
 
         @keyframes footerPattern {
-            0% { transform: translateX(0) translateY(0); }
-            100% { transform: translateX(100px) translateY(100px); }
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+
+            100% {
+                transform: translateX(100px) translateY(100px);
+            }
         }
 
         .footer-content {
@@ -894,8 +969,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .loading-text {
@@ -906,8 +986,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         /* Responsive Design */
@@ -961,24 +1048,50 @@
                 font-size: 1.2rem;
             }
 
-            .modal-prev { left: 1rem; }
-            .modal-next { right: 1rem; }
+            .modal-prev {
+                left: 1rem;
+            }
+
+            .modal-next {
+                right: 1rem;
+            }
         }
 
         /* Utility Animations */
         @keyframes slideInLeft {
-            from { transform: translateX(-100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         @keyframes slideInRight {
-            from { transform: translateX(100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         @keyframes fadeInUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         /* Custom Scrollbar */
@@ -1018,7 +1131,8 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="logo-section">
-                <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Baps_logo.svg" alt="BAPS Logo" class="logo-img">
+                <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Baps_logo.svg" alt="BAPS Logo"
+                    class="logo-img">
                 <div class="logo-text">
                     <h1>BAPS Shri Swaminarayan Mandir</h1>
                     <p>Bochasan, India</p>
@@ -1034,9 +1148,11 @@
                 <li><a href="#events">Events</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#timings">Timings</a></li>
+                <li><a href="#aarti">Aarti</a></li>
+                <li><a href="#satsangDiksha">Satsang Diksha</a></li>
                 <li><a href="login.html" class="attendance-btn">
-                    <i class="fas fa-lock"></i> Attendance Login
-                </a></li>
+                        <i class="fas fa-lock"></i> Attendance Login
+                    </a></li>
             </ul>
         </div>
     </nav>
@@ -1045,20 +1161,24 @@
     <section class="hero" id="home">
         <div class="hero-slider">
             <div class="hero-slide active">
-                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_011_Bochasan.jpg" alt="Bochasan Mandir 1">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_011_Bochasan.jpg"
+                    alt="Bochasan Mandir 1">
             </div>
             <div class="hero-slide">
-                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_057_Bochasan.jpg" alt="Bochasan Mandir 2">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_057_Bochasan.jpg"
+                    alt="Bochasan Mandir 2">
             </div>
             <div class="hero-slide">
-                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_066_Bochasan.jpg" alt="Bochasan Mandir 3">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_066_Bochasan.jpg"
+                    alt="Bochasan Mandir 3">
             </div>
             <div class="hero-slide">
-                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_080_Bochasan.jpg" alt="Bochasan Mandir 4">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_080_Bochasan.jpg"
+                    alt="Bochasan Mandir 4">
             </div>
         </div>
         <div class="hero-overlay"></div>
-        
+
         <div class="hero-content">
             <h1 class="hero-title">Divine Blessings Await</h1>
             <p class="hero-subtitle">Experience the spiritual journey at BAPS Bochasan Mandir</p>
@@ -1094,30 +1214,31 @@
                         <h3>Latest Divine Updates</h3>
                     </div>
                     <div class="card-content">
-                        <div style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; padding: 0.5rem 1rem; border-radius: 25px; font-size: 0.8rem; font-weight: bold; display: inline-block; margin-bottom: 1.5rem; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);">
+                        <div
+                            style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; padding: 0.5rem 1rem; border-radius: 25px; font-size: 0.8rem; font-weight: bold; display: inline-block; margin-bottom: 1.5rem; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);">
                             <i class="fas fa-star"></i> New Update
                         </div>
-                        
-                        <div style="margin-bottom: 2rem;">
-                            <div class="interactive-element" style="margin-bottom: 1rem; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                                <img src="/utsav.jpg" alt="Utsav Photo" style="width: 100%; height: 100%; object-fit: cover;">
-                            </div>
-                            <div class="interactive-element" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                                <img src="/dates.jpg" alt="Dates Photo" style="width: 100%; height: 100%; object-fit: cover;">
-                            </div>
-                        </div>
-                        
-                        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--accent-gold); margin-bottom: 1rem; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);">
+                        <h3
+                            style="font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--accent-gold); margin-bottom: 1rem; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);">
                             Mahant Swami Maharaj's Divine Visit
                         </h3>
-                        <div style="color: var(--accent-gold); font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <div
+                            style="color: var(--accent-gold); font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
                             <i class="fas fa-calendar-alt"></i>
                             <span>5th July 2024</span>
                         </div>
                         <p style="color: var(--text-gray); line-height: 1.8; font-weight: 300;">
-                            Experience the divine blessings of Mahant Swami Maharaj at Bochasan Mandir on 5th July. 
-                            Special sabha at 7:00 PM followed by darshan. All devotees are cordially invited to this sacred gathering.
+                            Experience the divine blessings of Mahant Swami Maharaj at Bochasan Mandir on 5th July.
+                            Special sabha at 7:00 PM followed by darshan. All devotees are cordially invited to this
+                            sacred gathering.
                         </p>
+                        <div style="margin-bottom: 2rem;">
+                            <div class="interactive-element"
+                                style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                                <img src="/dates.jpg" alt="Dates Photo"
+                                    style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -1128,25 +1249,9 @@
                         <h3>Celebrations</h3>
                     </div>
                     <div class="card-content">
-                        <!-- Event Slider -->
-                        <div class="event-slider">
-                            <div class="event-slide active">
-                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_034_Bochasan.jpg" alt="Event 1">
-                            </div>
-                            <div class="event-slide">
-                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_077_Bochasan.jpg" alt="Event 2">
-                            </div>
-                            <div class="event-slide">
-                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_080_Bochasan.jpg" alt="Event 3">
-                            </div>
-                        </div>
-
                         <div style="margin-bottom: 2rem;">
-                            <div style="display: flex; align-items: center; gap: 0.75rem; color: var(--neon-green); font-weight: 600; margin-bottom: 0.75rem;">
-                                <i class="fas fa-calendar"></i>
-                                <span>Sunday, July 21st at 4:00 PM</span>
-                            </div>
-                            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--text-light); margin-bottom: 0.75rem;">
+                            <h3
+                                style="font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--text-light); margin-bottom: 0.75rem;">
                                 Guru Purnima Celebration
                             </h3>
                             <div style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-gray);">
@@ -1154,22 +1259,145 @@
                                 <span>BAPS Bochasan Mandir</span>
                             </div>
                         </div>
-
-                        <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 1.5rem;">
-                            <h4 style="font-weight: 600; color: var(--accent-gold); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
-                                <i class="fas fa-users"></i>
-                                Weekly Sabha
-                            </h4>
-                            <div style="display: flex; align-items: center; gap: 0.75rem; color: var(--neon-blue); margin-bottom: 0.5rem;">
-                                <i class="fas fa-clock"></i>
-                                <span>Every Saturday at 8:45 PM</span>
+                        <!-- Event Slider -->
+                        <div class="event-slider" id="guruPurnimaSlider">
+                            <div class="event-slide active">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_034_Bochasan.jpg"
+                                    alt="Event 1">
                             </div>
-                            <p style="color: var(--text-gray); font-weight: 300;">Yuvak Sabha - Mandir Hall</p>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_077_Bochasan.jpg"
+                                    alt="Event 2">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_070_Bochasan.jpg"
+                                    alt="Event 3">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_057_Bochasan.jpg"
+                                    alt="Event 4">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_052_Bochasan.jpg"
+                                    alt="Event 5">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_048_Bochasan.jpg"
+                                    alt="Event 6">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_043_Bochasan.jpg"
+                                    alt="Event 7">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_040_Bochasan.jpg"
+                                    alt="Event 8">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <div style="margin-bottom: 2rem;">
+                            <h3
+                                style="font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--text-light); margin-bottom: 0.75rem;">
+                                Diwali & Annakut Celebrations
+                            </h3>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-gray);">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>BAPS Bochasan Mandir</span>
+                            </div>
+                        </div>
+                        <!-- Event Slider -->
+                        <div class="event-slider" id="diwaliSlider">
+                            <div class="event-slide active">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/31674/WebImages/BAPS_Diwali_New_Year_Annakut_Celebration_Bochasan_21.jpg"
+                                    alt="Event 1">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/31674/WebImages/BAPS_Diwali_New_Year_Annakut_Celebration_Bochasan_19.jpg"
+                                    alt="Event 2">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/31674/WebImages/BAPS_Diwali_New_Year_Annakut_Celebration_Bochasan_13.jpg"
+                                    alt="Event 3">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/31674/WebImages/BAPS_Diwali_New_Year_Annakut_Celebration_Bochasan_06.jpg"
+                                    alt="Event 4">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/31674/WebImages/BAPS_Diwali_New_Year_Annakut_Celebration_Bochasan_02.jpg"
+                                    alt="Event 5">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/31674/WebImages/BAPS_Diwali_New_Year_Annakut_Celebration_Bochasan_01.jpg"
+                                    alt="Event 6">
+                            </div>
                         </div>
                     </div>
                 </div>
+
+        </section>
+
+        <section class="weekly-sabha-section">
+            <div class="sabha-card">
+                <div class="sabha-header">
+                    <h4 class="sabha-title">
+                        <i class="fas fa-users"></i>
+                        Weekly Sabha
+                    </h4>
+                </div>
+                <div class="sabha-details">
+                    <div class="sabha-timing">
+                        <span> Yuvak Sabha </span>
+                    </div>
+                    <p class="sabha-location"> <i class="fas fa-clock"></i> Every Saturday at 8:45 PM - Mandir Hall</p>
+                </div>
             </div>
         </section>
+
+        <style>
+            .weekly-sabha-section {
+                padding: 1rem;
+            }
+
+            .sabha-card {
+                background: var(--glass-bg);
+                border-radius: 15px;
+                padding: 1.5rem;
+                border: 1px solid var(--glass-border);
+            }
+
+            .sabha-header {
+                margin-bottom: 1rem;
+            }
+
+            .sabha-title {
+                font-weight: 600;
+                color: var(--accent-gold);
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .sabha-details {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .sabha-timing {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                color: var(--neon-blue);
+            }
+
+            .sabha-location {
+                color: var(--text-gray);
+                font-weight: 300;
+            }
+        </style>
 
         <!-- Timings Section -->
         <section id="timings" class="section">
@@ -1246,55 +1474,408 @@
                         </div>
                     </div>
                 </div>
+                * All dates and timings may be subject to change.
             </div>
         </section>
 
         <!-- Gallery Section -->
-        <section id="gallery" class="section">
-            <div class="section-title">
-                <h2>Divine Gallery</h2>
-                <div class="section-divider"></div>
+        <section id="gallery" class="section"></section>
+        <div class="section-title">
+            <h2>Divine Gallery</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="gallery-grid"></div>
+        <div class="gallery-grid">
+            <div class="gallery-item"
+                data-src="https://www.baps.org//Data/Sites/1/Media/LocationImages/128128-bochasan.jpg">
+                <img src="https://www.baps.org//Data/Sites/1/Media/LocationImages/128128-bochasan.jpg" alt="Gallery 1">
             </div>
-
-            <div class="gallery-grid">
-                <div class="gallery-item" data-src="https://www.baps.org//Data/Sites/1/Media/LocationImages/128128-bochasan.jpg">
-                    <img src="https://www.baps.org//Data/Sites/1/Media/LocationImages/128128-bochasan.jpg" alt="Gallery 1">
-                </div>
-                <div class="gallery-item" data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_001_Bochasan.jpg">
-                    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_001_Bochasan.jpg" alt="Gallery 2">
-                </div>
-                <div class="gallery-item" data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_002_Bochasan.jpg">
-                    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_002_Bochasan.jpg" alt="Gallery 3">
-                </div>
-                <div class="gallery-item" data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_003_Bochasan.jpg">
-                    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_003_Bochasan.jpg" alt="Gallery 4">
-                </div>
-                <div class="gallery-item" data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_005_Bochasan.jpg">
-                    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_005_Bochasan.jpg" alt="Gallery 5">
-                </div>
-                <div class="gallery-item" data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_006_Bochasan.jpg">
-                    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_006_Bochasan.jpg" alt="Gallery 6">
-                </div>
-                <div class="gallery-item" data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_010_Bochasan.jpg">
-                    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_010_Bochasan.jpg" alt="Gallery 7">
-                </div>
-                <div class="gallery-item" data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_024_Bochasan.jpg">
-                    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_024_Bochasan.jpg" alt="Gallery 8">
-                </div>
-                <div class="gallery-item" data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_028_Bochasan.jpg">
-                    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_028_Bochasan.jpg" alt="Gallery 9">
-                </div>
-                <div class="gallery-item" data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_043_Bochasan.jpg">
-                    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_043_Bochasan.jpg" alt="Gallery 10">
-                </div>
-                <div class="gallery-item" data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_32.jpg">
-                    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_32.jpg" alt="Gallery 11">
-                </div>
-                <div class="gallery-item" data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_73.jpg">
-                    <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_73.jpg" alt="Gallery 12">
-                </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33501/WebImages/2025_07_09_001_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33501/WebImages/2025_07_09_001_Bochasan.jpg"
+                    alt="Gallery 2">
             </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_001_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_001_Bochasan.jpg"
+                    alt="Gallery 2">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_002_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_002_Bochasan.jpg"
+                    alt="Gallery 3">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_003_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_003_Bochasan.jpg"
+                    alt="Gallery 4">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_005_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_005_Bochasan.jpg"
+                    alt="Gallery 5">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_006_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_006_Bochasan.jpg"
+                    alt="Gallery 6">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_010_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_010_Bochasan.jpg"
+                    alt="Gallery 7">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_024_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_024_Bochasan.jpg"
+                    alt="Gallery 8">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_028_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_028_Bochasan.jpg"
+                    alt="Gallery 9">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_043_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_043_Bochasan.jpg"
+                    alt="Gallery 10">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_32.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_32.jpg"
+                    alt="Gallery 11">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_73.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_73.jpg"
+                    alt="Gallery 12">
+            </div>
+        </div>
         </section>
+
+
+<!-- Aarti Videos Section -->
+<section class="section aarti-section" id="aarti">
+    <div class="section-title">
+        <h2>Daily Aartis</h2>
+        <div class="section-divider"></div>
+    </div>
+
+    <div class="cards-grid">
+        <!-- Morning Aarti Card -->
+        <div class="glass-card aarti-card">
+            <div class="card-header">
+                <i class="fas fa-sun"></i>
+                <h3>Morning Aarti</h3>
+            </div>
+            <div class="card-content">
+                <div class="video-container" data-video-id="6q9MD8R146c">
+                    <div class="video-overlay">
+                        <i class="fas fa-play play-icon"></i>
+                    </div>
+                    <img src="https://img.youtube.com/vi/6q9MD8R146c/maxresdefault.jpg" alt="Morning Aarti Thumbnail" class="video-thumbnail">
+                </div>
+                <div class="video-controls">
+                    <button class="control-btn play-pause-btn">
+                        <i class="fas fa-play"></i>
+                        <span>Play</span>
+                    </button>
+                    <div class="time-display">0:00 / 0:00</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evening Aarti Card -->
+        <div class="glass-card aarti-card">
+            <div class="card-header">
+                <i class="fas fa-moon"></i>
+                <h3>Evening Aarti</h3>
+            </div>
+            <div class="card-content">
+                <div class="video-container" data-video-id="zKcAHp9viBc">
+                    <div class="video-overlay">
+                        <i class="fas fa-play play-icon"></i>
+                    </div>
+                    <img src="https://img.youtube.com/vi/zKcAHp9viBc/maxresdefault.jpg" alt="Evening Aarti Thumbnail" class="video-thumbnail">
+                </div>
+                <div class="video-controls">
+                    <button class="control-btn play-pause-btn">
+                        <i class="fas fa-play"></i>
+                        <span>Play</span>
+                    </button>
+                    <div class="time-display">0:00 / 0:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.aarti-section {
+    padding: 4rem 0;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 16/9;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.video-overlay:hover {
+    background: rgba(0,0,0,0.6);
+}
+
+.play-icon {
+    font-size: 3rem;
+    color: var(--accent-gold);
+    filter: drop-shadow(0 0 10px rgba(255,215,0,0.5));
+    transition: all 0.3s ease;
+}
+
+.video-overlay:hover .play-icon {
+    transform: scale(1.1);
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.video-container:hover .video-thumbnail {
+    transform: scale(1.05);
+}
+
+.video-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background: var(--glass-bg);
+    border-radius: 10px;
+    border: 1px solid var(--glass-border);
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 5px;
+    color: var(--primary-dark);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+}
+
+.time-display {
+    color: var(--text-gray);
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.aarti-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.aarti-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+</style>
+
+<script>
+// YouTube API initialization
+let tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+let firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+let players = {};
+
+function onYouTubeIframeAPIReady() {
+    document.querySelectorAll('.video-container').forEach(container => {
+        const videoId = container.dataset.videoId;
+        const playerId = `player-${videoId}`;
+        
+        // Create player div
+        const playerDiv = document.createElement('div');
+        playerDiv.id = playerId;
+        container.appendChild(playerDiv);
+        
+        // Initialize player
+        players[videoId] = new YT.Player(playerId, {
+            videoId: videoId,
+            playerVars: {
+                'autoplay': 0,
+                'controls': 0,
+                'modestbranding': 1,
+                'rel': 0
+            },
+            events: {
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    });
+}
+
+function onPlayerStateChange(event) {
+    const container = event.target.getIframe().closest('.video-container');
+    const controls = container.nextElementSibling;
+    const btn = controls.querySelector('.play-pause-btn');
+    const icon = btn.querySelector('i');
+    const text = btn.querySelector('span');
+    
+    if (event.data === YT.PlayerState.PLAYING) {
+        icon.className = 'fas fa-pause';
+        text.textContent = 'Pause';
+    } else {
+        icon.className = 'fas fa-play';
+        text.textContent = 'Play';
+    }
+}
+
+// Add click handlers
+document.querySelectorAll('.video-container').forEach(container => {
+    const videoId = container.dataset.videoId;
+    const controls = container.nextElementSibling;
+    const btn = controls.querySelector('.play-pause-btn');
+    const timeDisplay = controls.querySelector('.time-display');
+    
+    container.addEventListener('click', () => {
+        const player = players[videoId];
+        if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+            player.pauseVideo();
+        } else {
+            player.playVideo();
+        }
+    });
+    
+    btn.addEventListener('click', () => {
+        const player = players[videoId];
+        if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+            player.pauseVideo();
+        } else {
+            player.playVideo();
+        }
+    });
+    
+    // Update time display
+    setInterval(() => {
+        const player = players[videoId];
+        if (player && player.getCurrentTime) {
+            const current = formatTime(player.getCurrentTime());
+            const duration = formatTime(player.getDuration());
+            timeDisplay.textContent = `${current} / ${duration}`;
+        }
+    }, 1000);
+});
+
+function formatTime(seconds) {
+    seconds = Math.floor(seconds);
+    const minutes = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+}
+</script>
+
+
+
+
+
+<main>
+    <!-- Satsang Diksha Section -->
+    <section class="section" id="satsangDiksha">
+        <div class="section-title">
+            <h2>Satsang Diksha</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-header">
+                <i class="fas fa-book"></i>
+                <h3>Sacred Teachings</h3>
+            </div>
+            <div class="card-content">
+                <p>Explore the profound wisdom of Satsang Diksha, a sacred text containing essential teachings of the Swaminarayan Sampraday. Available in Sanskrit and Gujarati, this holy scripture provides spiritual guidance and divine knowledge.</p>
+                
+                <div style="margin: 2rem 0; text-align: center;">
+                    <a href="https://www.baps.org/Data/Sites/1/Media/ProductCategoryChapterImages/1399/Satsang%20Diksha.pdf" 
+                       class="cta-btn cta-primary" 
+                       target="_blank"
+                       style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-download"></i>
+                        Download Satsang Diksha
+                    </a>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                    <div>
+                        <h4 style="color: var(--accent-gold); margin-bottom: 1rem;">Sanskrit Edition</h4>
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: 0.5rem;">
+                                <i class="fas fa-circle" style="color: var(--accent-gold); font-size: 0.5rem; margin-right: 0.5rem;"></i>
+                                Original Sanskrit verses
+                            </li>
+                            <li style="margin-bottom: 0.5rem;">
+                                <i class="fas fa-circle" style="color: var(--accent-gold); font-size: 0.5rem; margin-right: 0.5rem;"></i>
+                                Classical scriptural format
+                            </li>
+                            <li style="margin-bottom: 0.5rem;">
+                                <i class="fas fa-circle" style="color: var(--accent-gold); font-size: 0.5rem; margin-right: 0.5rem;"></i>
+                                Traditional annotations
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-gold); margin-bottom: 1rem;">Gujarati Edition</h4>
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: 0.5rem;">
+                                <i class="fas fa-circle" style="color: var(--accent-gold); font-size: 0.5rem; margin-right: 0.5rem;"></i>
+                                Detailed translations
+                            </li>
+                            <li style="margin-bottom: 0.5rem;">
+                                <i class="fas fa-circle" style="color: var(--accent-gold); font-size: 0.5rem; margin-right: 0.5rem;"></i>
+                                Comprehensive explanations
+                            </li>
+                            <li style="margin-bottom: 0.5rem;">
+                                <i class="fas fa-circle" style="color: var(--accent-gold); font-size: 0.5rem; margin-right: 0.5rem;"></i>
+                                Cultural context
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
     </main>
 
     <!-- Advanced Modal -->
@@ -1416,23 +1997,41 @@
         // Auto-advance hero slider
         setInterval(nextHeroSlide, 6000);
 
-        // Event Slider
-        let currentEventSlide = 0;
-        const eventSlides = document.querySelectorAll('.event-slide');
+        // Diwali Event Slider
+        let currentDiwaliSlide = 0;
+        const diwaliSlides = document.querySelectorAll('#diwaliSlider .event-slide');
 
-        function showEventSlide(index) {
-            eventSlides.forEach((slide, i) => {
+        function showDiwaliSlide(index) {
+            diwaliSlides.forEach((slide, i) => {
                 slide.classList.toggle('active', i === index);
             });
         }
 
-        function nextEventSlide() {
-            currentEventSlide = (currentEventSlide + 1) % eventSlides.length;
-            showEventSlide(currentEventSlide);
+        function nextDiwaliSlide() {
+            currentDiwaliSlide = (currentDiwaliSlide + 1) % diwaliSlides.length;
+            showDiwaliSlide(currentDiwaliSlide);
         }
 
-        // Auto-advance event slider
-        setInterval(nextEventSlide, 4000);
+        // Auto-advance Diwali slider
+        setInterval(nextDiwaliSlide, 4000);
+
+        // Guru Purnima Event Slider
+        let currentGuruPurnimaSlide = 0;
+        const guruPurnimaSlides = document.querySelectorAll('#guruPurnimaSlider .event-slide');
+
+        function showGuruPurnimaSlide(index) {
+            guruPurnimaSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextGuruPurnimaSlide() {
+            currentGuruPurnimaSlide = (currentGuruPurnimaSlide + 1) % guruPurnimaSlides.length;
+            showGuruPurnimaSlide(currentGuruPurnimaSlide);
+        }
+
+        // Auto-advance Guru Purnima slider with a slightly different interval to create visual variety
+        setInterval(nextGuruPurnimaSlide, 4500);
 
         // Intersection Observer for Animations
         const observerOptions = {
@@ -1531,9 +2130,11 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20; // Added extra 20px padding
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
                     });
                 }
             });
@@ -1583,4 +2184,5 @@
         }, 3000);
     </script>
 </body>
+
 </html>
