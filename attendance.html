@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/4/4a/Baps_logo.svg" type="image/svg+xml">
+  <title>Yuvak Mandal Attendance</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #0d47a1;
+      --primary-light: #1565c0;
+      --present-color: #4CAF50;
+      --bg-color: #f5f7fa;
+      --card-color: #ffffff;
+      --text-color: #333333;
+      --border-color: #e0e0e0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.5;
+      padding-bottom: 20px;
+    }
+
+    .navbar {
+      background-color: var(--primary);
+      color: white;
+      padding: 15px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .navbar img {
+      height: 30px;
+      filter: brightness(0) invert(1);
+    }
+
+    .container {
+      max-width: 100%;
+      padding: 15px;
+    }
+
+    .search-container {
+      position: sticky;
+      top: 60px;
+      background-color: var(--bg-color);
+      padding: 10px 0;
+      z-index: 90;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background-color: var(--card-color);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(13, 71, 161, 0.2);
+    }
+
+    .name-list {
+      margin-top: 10px;
+    }
+
+    .person {
+      background-color: var(--card-color);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+    }
+
+    .person.present {
+      background-color: rgba(76, 175, 80, 0.1);
+      border-left: 4px solid var(--present-color);
+    }
+
+    .person-name {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    .present-btn {
+      background-color: var(--present-color);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .present-btn:active {
+      transform: scale(0.95);
+    }
+
+    .summary-card {
+      background-color: var(--card-color);
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+
+    .summary-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .action-btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .action-btn:active {
+      background-color: var(--primary-light);
+      transform: scale(0.98);
+    }
+
+    .action-btn.secondary {
+      background-color: white;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    /* Code Entry Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(12, 107, 110, 0.993);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background-color: var(--card-color);
+      border-radius: 15px;
+      width: 100%;
+      max-width: 350px;
+      height: 100%;
+      max-height: fit-content;
+      padding: 25px;
+      padding-bottom: 50px;
+      text-align: center;
+      animation: modalFadeIn 0.3s;
+      margin: 0 auto;
+      margin-top: 50px;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-logo {
+      height: 60px;
+      margin-bottom: 15px;
+    }
+
+    .modal-title {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    .modal-text {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .code-input {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.2rem;
+      text-align: center;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      margin-bottom: 15px;
+      letter-spacing: 5px;
+    }
+
+    .code-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .error-message {
+      color: #f44336;
+      margin-bottom: 15px;
+      min-height: 20px;
+    }
+
+    .timer-message {
+      color: #f44336;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 400px) {
+      .navbar-title {
+        font-size: 1.1rem;
+      }
+      
+      .person {
+        padding: 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      
+      .present-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .stats {
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      
+      .stat-item {
+        width: 45%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Code Entry Modal -->
+  <div id="codeModal" class="modal" style="display: block;">
+    <div class="modal-content">
+      <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Baps_logo.svg" class="modal-logo">
+      <h2 class="modal-title">Enter Access Code</h2>
+      <p class="modal-text">Please enter the 4-digit code to access the system</p>
+      <input type="password" id="accessCode" class="code-input" maxlength="4" placeholder="____" disabled>
+      <div id="codeError" class="error-message"></div>
+      <div id="timerMessage" class="timer-message" style="display: none;"></div>
+      <button id="submitBtn" class="action-btn" onclick="verifyCode()" disabled style="margin: 0 auto; display: block;">
+        <i class="fas fa-unlock-alt"></i> Submit
+      </button>
+    </div>
+  </div>
+
+  <div class="navbar">
+    <div class="navbar-title">
+      <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Baps_logo.svg">
+      <span>Yuvak Mandal Attendance</span>
+    </div>
+  </div>
+
+  <div class="container" id="mainContainer" style="display: none;">
+    <!-- Rest of your attendance system content -->
+  </div>
+
+  <script>
+    // Access code (simple 4-digit code - change this to your preferred code)
+    const ACCESS_CODE = "1907";
+    let incorrectAttempts = 0;
+    let timerInterval;
+    let timeLeft = 60; // 1 minute in seconds
+    
+    // Yuvak list
+    const names = [
+  "1. Vidur M. Patel",
+  "2. Meet G. Patel",
+  "3. Tilak V. Patel",
+  "4. Priyash H. Patel",
+  "5. Krish P. Patel",
+  "6. Kirtan D. Parmar",
+  "7. Bhaumik Patel",
+  "8. Parth A. Patel",
+  "9. Maan A. Patel",
+  "10. Dhaval Parmar",
+  "11. Jaydeep K. Gohel",
+  "12. Kishan P. Patel",
+  "13. Dheeren J. Patel",
+  "14. Nil H. Bhoi",
+  "15. Dhruvil K. Patel",
+  "16. Meet S. Patel (Road)",
+  "17. Preet S. Patel",
+  "18. Jagrut J. Patel",
+  "19. Manan D. Ka.Patel",
+  "20. Joy P. Patel",
+  "21. Hari P. Ka.Patel",
+  "22. Tanmay D. Ka.Patel",
+  "23. Jay R. Patel",
+  "24. Dhirendrabhai Patel",
+  "25. Mayankbhai Patel",
+  "26. Jay Ka.Patel",
+  "27. Archik Solanki",
+  "28. Mousam Ka.Patel",
+  "29. Vivek Ka.Patel",
+  "30. Mihirbhai Patel",
+  "31. Harsh K. Patel",
+  "32. Lalitbhai A. Gohel",
+  "33. Gautambhai A. Gohel",
+  "34. Manish Prajapati",
+  "35. Tushar Rohit",
+  "36. Harsh H. Patel",
+  "37. Paath H. Patel",
+  "38. Akshay P. Patel",
+  "39. Pratik J. Patel",
+  "40. Akshar C. Patel",
+  "41. Harshil V. Patel",
+  "42. Tejash P. Patel",
+  "43. Zeel D. Patel",
+  "44. Yug P. Patel",
+  "45. Parth Chavda",
+  "46. Harsh R. Ka.Patel",
+  "47. Savan M. Patel",
+  "48. Bhavy R. Patel",
+  "49. Mantra A. Patel",
+  "50. Nishant S. Arya",
+  "51. Meet S. Patel",
+  "52. Dhaval K. Ka.Patel",
+  "53. Darshan D. Patel",
+  "54. Hiteshbhai N. Patel",
+  "55. Subhashbhai A. Patel",
+  "56. Bharatbhai Y. Patel"
+];
+
+    // Initialize the app
+    document.addEventListener("DOMContentLoaded", function() {
+      // Add the name list container to mainContainer
+      const mainContainer = document.getElementById('mainContainer');
+      mainContainer.innerHTML = `
+        <div class="search-container">
+          <input type="text" id="search" class="search-input" 
+            placeholder="Search names..." oninput="filterNames()">
+        </div>
+        <div id="nameList" class="name-list"></div>
+        <div class="summary-card">
+          <h3 class="summary-title">Attendance Summary</h3>
+          <div class="stats">
+            <div class="stat-item">
+              <span id="presentCount" class="stat-value">0</span>
+              <span class="stat-label">Present</span>
+            </div>
+            <div class="stat-item">
+              <span id="totalCount" class="stat-value">0</span>
+              <span class="stat-label">Total</span>
+            </div>
+          </div>
+          <div class="action-buttons">
+            <button class="action-btn" onclick="saveAttendance()">
+              <i class="fas fa-save"></i> Save Attendance
+            </button>
+            <button class="action-btn" onclick="exportExcel()">
+              <i class="fas fa-file-excel"></i> Export to Excel
+            </button>
+            <button class="action-btn secondary" onclick="logout()">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+          </div>
+        </div>
+      `;
+
+      // Clear authentication on page refresh/load
+      localStorage.removeItem('authenticated');
+      
+      // Check if timer is active from previous session
+      const lockUntil = localStorage.getItem('lockUntil');
+      if (lockUntil && new Date().getTime() < parseInt(lockUntil)) {
+        startTimer(Math.ceil((parseInt(lockUntil) - new Date().getTime()) / 1000));
+      } else {
+        const codeInput = document.getElementById('accessCode');
+        if (codeInput) {
+          codeInput.disabled = false;
+          codeInput.focus();
+          document.getElementById('submitBtn').disabled = false;
+        }
+      }
+      
+      document.getElementById('codeModal').style.display = 'block';
+      document.getElementById('mainContainer').style.display = 'none';
+    });
+
+    // Rest of the functions remain the same
+    function verifyCode() {
+      const enteredCode = document.getElementById('accessCode').value;
+      const errorElement = document.getElementById('codeError');
+      
+      if (enteredCode === ACCESS_CODE) {
+        incorrectAttempts = 0;
+        localStorage.setItem('authenticated', 'true');
+        document.getElementById('codeModal').style.display = 'none';
+        document.getElementById('mainContainer').style.display = 'block';
+        loadNames();
+      } else {
+        incorrectAttempts++;
+        
+        if (incorrectAttempts >= 3) {
+          startTimer(60);
+          const lockUntil = new Date().getTime() + 60000;
+          localStorage.setItem('lockUntil', lockUntil.toString());
+        } else {
+          errorElement.textContent = `Incorrect code. ${3 - incorrectAttempts} attempts remaining.`;
+          document.getElementById('accessCode').value = '';
+          setTimeout(() => {
+            errorElement.textContent = '';
+          }, 3000);
+        }
+      }
+    }
+
+    // Start timer function
+    function startTimer(seconds) {
+      timeLeft = seconds;
+      clearInterval(timerInterval);
+      
+      // Disable input and button
+      document.getElementById('accessCode').disabled = true;
+      document.getElementById('submitBtn').disabled = true;
+      
+      // Show timer message
+      const timerMessage = document.getElementById('timerMessage');
+      timerMessage.style.display = 'block';
+      updateTimerDisplay();
+      
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          timerMessage.style.display = 'none';
+          document.getElementById('accessCode').disabled = false;
+          document.getElementById('submitBtn').disabled = false;
+          document.getElementById('accessCode').value = '';
+          document.getElementById('accessCode').focus();
+          incorrectAttempts = 0;
+          localStorage.removeItem('lockUntil');
+        }
+      }, 1000);
+    }
+    
+    // Update timer display
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      document.getElementById('timerMessage').textContent = 
+        `Too many attempts. Please try again in ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
+
+    // Logout function
+function logout() {
+  // Create modal elements
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+
+  const modalContent = document.createElement('div');
+  modalContent.className = 'modal-content';
+  modalContent.style.textAlign = 'center';
+  modalContent.style.padding = '30px';
+  modalContent.style.maxWidth = '400px';
+  modalContent.style.margin = 'auto';
+  modalContent.style.marginTop = '20vh';
+
+  // Add content
+  modalContent.innerHTML = `
+    <h2 class="modal-title" style="margin-bottom: 20px;">Confirm Logout</h2>
+    <p style="margin-bottom: 25px; color: #666;">Are you sure you want to logout from the attendance system?</p>
+    <div style="display: flex; gap: 15px; justify-content: center;">
+      <button class="action-btn secondary" onclick="this.closest('.modal').remove()" style="min-width: 100px;">
+        Cancel
+      </button>
+      <button class="action-btn" onclick="confirmLogout()" style="min-width: 100px;">
+        Logout
+      </button>
+    </div>
+  `;
+
+  // Add modal to page
+  modal.appendChild(modalContent);
+  document.body.appendChild(modal);
+}
+
+function confirmLogout() {
+  localStorage.removeItem('authenticated');
+  window.location.href = 'index.html';
+}
+
+    // Load names into the list
+    function loadNames() {
+      const nameList = document.getElementById("nameList");
+      nameList.innerHTML = '';
+      
+      names.forEach((name, index) => {
+        const div = document.createElement("div");
+        div.className = "person";
+        div.id = `person-${index}`;
+        div.innerHTML = `
+          <div class="person-name">${name}</div>
+          <button class="present-btn" onclick="togglePresent(${index})">
+            <i class="fas fa-check"></i> Present
+          </button>
+        `;
+        nameList.appendChild(div);
+      });
+      
+      // Update counts
+      updateSummary();
+    }
+
+    // Toggle present status
+    function togglePresent(index) {
+      const personElement = document.getElementById(`person-${index}`);
+      personElement.classList.toggle('present');
+      updateSummary();
+    }
+
+    // Update attendance summary
+    function updateSummary() {
+      const presentCount = document.querySelectorAll('.person.present').length;
+      document.getElementById('presentCount').textContent = presentCount;
+      document.getElementById('totalCount').textContent = names.length;
+    }
+
+    // Filter names based on search input
+    function filterNames() {
+      const input = document.getElementById("search").value.toLowerCase();
+      const allNames = document.querySelectorAll(".person");
+      
+      allNames.forEach(div => {
+        const name = div.querySelector('.person-name').textContent.toLowerCase();
+        div.style.display = name.includes(input) ? "flex" : "none";
+      });
+      
+      // Update counts for visible names only
+      const visiblePresent = document.querySelectorAll('.person.present[style="display: flex;"]').length;
+      const visibleTotal = document.querySelectorAll('.person[style="display: flex;"]').length;
+      document.getElementById('presentCount').textContent = visiblePresent;
+      document.getElementById('totalCount').textContent = visibleTotal;
+    }
+
+    // Save attendance to localStorage
+    function saveAttendance() {
+      const attendanceData = {};
+      document.querySelectorAll('.person.present').forEach((person, index) => {
+        attendanceData[names[index]] = true;
+      });
+      
+      // Save to localStorage
+      localStorage.setItem('attendance', JSON.stringify(attendanceData));
+      
+      // Show confirmation
+      alert(`Attendance saved successfully!\nPresent: ${Object.keys(attendanceData).length}/${names.length}`);
+    }
+
+    // Export to Excel
+    function exportExcel() {
+      const rows = [["Name", "Status"]];
+      const presentNames = [];
+      
+      document.querySelectorAll(".person").forEach((div, index) => {
+        const name = names[index];
+        const status = div.classList.contains('present') ? 'Present' : 'Absent';
+        rows.push([name, status]);
+        
+        if (status === 'Present') {
+          presentNames.push(name);
+        }
+      });
+
+      // Add summary at the end
+      rows.push([""]);
+      rows.push(["Summary", ""]);
+      rows.push(["Total Present", presentNames.length]);
+      rows.push(["Total Members", names.length]);
+      rows.push(["Percentage", Math.round((presentNames.length / names.length) * 100) + "%"]);
+      rows.push([""]);
+      rows.push(["Present Members", ""]);
+      presentNames.forEach(name => rows.push([name, ""]));
+
+      const csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "attendance_" + new Date().toISOString().split('T')[0] + ".csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Allow pressing Enter in code input to submit
+    document.getElementById('accessCode')?.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        verifyCode();
+      }
+    });
+</script>
+
+</body>
+
+</html>
