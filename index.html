@@ -997,7 +997,17 @@
             }
 
             .logo-text {
-                display: none;
+                /* display: none; */
+                transform: scale(0.7);
+               
+            }
+            
+            .logo-text h1 {
+                font-size: 1.3rem;
+            }
+            
+            .logo-text p {
+                font-size: 1rem;
             }
 
             .nav-links {
@@ -1973,7 +1983,7 @@
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('loadingScreen').classList.add('hidden');
-            }, 2000);
+            }, 500);
         });
 
         // Create Floating Particles
