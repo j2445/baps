@@ -1957,35 +1957,95 @@ window.addEventListener('load', () => {
                         <h3>E-Books Download</h3>
                     </div>
                     <div class="card-content">
-                        <div style="margin: 2rem 0; text-align: center;">
-                            <a href="https://www.baps.org/CreateDownloads/Download.aspx?fileID=b7b193d4-d25d-48d6-a1c3-2c44de6c2184"
-                                class="cta-btn cta-primary" target="_blank"
-                                style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                                <i class="fas fa-download"></i>
-                                Satsang Diksha
-                            </a>
-                        </div>
+  <div class="download-card">
+    <img 
+      src="https://www.baps.org/Data/Sites/1/Media/DownloadableFile/Satsang_Diksha_Gujarati_1_h.jpg" 
+      alt="Satsang Diksha Book"
+      class="book-cover"
+    >
+    <a 
+      href="https://www.baps.org/CreateDownloads/Download.aspx?fileID=b7b193d4-d25d-48d6-a1c3-2c44de6c2184"
+      class="download-btn"
+      target="_blank"
+    >
+      <i class="fas fa-download"></i>
+      Satsang Diksha
+    </a>
+  </div>
 
+  <div class="download-card">
+    <img 
+      src="https://www.baps.org/Data/Sites/1/Media/DownloadableFile/vachanamrut_guj_h.jpg" 
+      alt="Vachanamrut Book"
+      class="book-cover"
+    >
+    <a 
+      href="https://www.baps.org/Data/Sites/1/Media/DownloadableFile/Vachanamrut_002.pdf"
+      class="download-btn"
+      target="_blank"
+    >
+      <i class="fas fa-download"></i>
+      Vachanamrut
+    </a>
+  </div>
 
-                        <div style="margin: 2rem 0; text-align: center;">
-                            <a href="https://www.baps.org/Data/Sites/1/Media/DownloadableFile/Vachanamrut_002.pdf"
-                                class="cta-btn cta-primary" target="_blank"
-                                style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                                <i class="fas fa-download"></i>
-                                Vachanamrut
-                            </a>
-                        </div>
+  <div class="download-card">
+    <img 
+      src="https://www.baps.org/Data/Sites/1/Media/DownloadableFile/swaminivato_guj_h.jpg" 
+      alt="Swamini Vato Book"
+      class="book-cover"
+    >
+    <a 
+      href="https://www.baps.org/Data/Sites/1/Media/DownloadableFile/Swamini_Vato_001.pdf"
+      class="download-btn"
+      target="_blank"
+    >
+      <i class="fas fa-download"></i>
+      Swamini Vato
+    </a>
+  </div>
+</div>
 
-
-                        <div style="margin: 2rem 0; text-align: center;">
-                            <a href="https://www.baps.org/Data/Sites/1/Media/DownloadableFile/Swamini_Vato_001.pdf"
-                                class="cta-btn cta-primary" target="_blank"
-                                style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                                <i class="fas fa-download"></i>
-                                Swamini Vato
-                            </a>
-                        </div>
-                    </div>
+<style>
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .download-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .book-cover {
+    width: 120px;
+    height: auto;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #0066cc;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .download-btn:hover {
+    background-color: #0052a3;
+  }
+</style>
                 </div>
             </section>
         </main>
