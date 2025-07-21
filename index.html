@@ -43,39 +43,7 @@
             line-height: 1.6;
         }
 
-        /* Animated Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
-            animation: backgroundShift 20s ease-in-out infinite;
-        }
 
-        @keyframes backgroundShift {
-
-            0%,
-            100% {
-                transform: translateX(0) translateY(0);
-            }
-
-            25% {
-                transform: translateX(-20px) translateY(-10px);
-            }
-
-            50% {
-                transform: translateX(20px) translateY(10px);
-            }
-
-            75% {
-                transform: translateX(-10px) translateY(20px);
-            }
-        }
 
         /* Floating Particles */
         .particles {
@@ -224,11 +192,8 @@
         }
 
         .attendance-btn {
-            background: linear-gradient(135deg, var(--glass-bg), rgba(255, 255, 255, 0.1));
-            border: 2px solid var(--glass-border);
             color: var(--text-light);
             padding: 0.85rem 2rem;
-            border-radius: 50px;
             font-weight: 700;
             text-decoration: none;
             backdrop-filter: blur(15px);
@@ -238,32 +203,6 @@
             letter-spacing: 0.5px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-
-        .attendance-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 150%;
-            height: 150%;
-            background: var(--gradient-primary);
-            transform: translate(-50%, -50%) scale(0);
-            border-radius: 50%;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: -1;
-        }
-
-        .attendance-btn:hover {
-            color: var(--primary-dark);
-            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
-            border-color: var(--accent-gold);
-        }
-
-        .attendance-btn:active {
-            transform: translateY(1px) scale(0.98);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-        }
-
 
         .mobile-menu-btn {
             display: none;
@@ -346,7 +285,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100vw;
+            width: 100%;
             height: 100vh;
             z-index: 1;
             overflow: hidden;
@@ -440,7 +379,6 @@
         }
 
         .section {
-            margin-bottom: 8rem;
             opacity: 0;
             transform: translateY(50px);
             transition: all 0.8s ease;
@@ -453,14 +391,12 @@
 
         .section-title {
             text-align: center;
-            margin-bottom: 4rem;
         }
 
         .section-title h2 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 700;
-            margin-bottom: 1rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -495,7 +431,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
             gap: 3rem;
-            margin-bottom: 6rem;
+            margin-bottom: 4rem;
         }
 
         .glass-card {
@@ -605,7 +541,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
-            padding: 1rem;
         }
 
         .gallery-item {
@@ -815,11 +750,6 @@
             transition: all 0.3s ease;
         }
 
-        .timing-row:hover {
-            background: rgba(255, 215, 0, 0.05);
-            padding-left: 1rem;
-        }
-
         .timing-row:last-child {
             border-bottom: none;
         }
@@ -864,10 +794,11 @@
         }
 
         .footer-content {
-            max-width: 1400px;        
+            max-width: 1400px;
             text-align: center;
             position: relative;
             z-index: 1;
+            height: auto;
         }
 
         .footer-title {
@@ -885,7 +816,7 @@
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .social-link {
@@ -930,21 +861,16 @@
 
 
         /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-container {
-                padding: 0 1rem;
-            }
+        @media (max-width: 1250px) {
+
 
             .logo-section {
                 gap: 0.5rem;
-                /* Reduced from 1rem to 0.5rem */
             }
 
             .logo-text {
-                /* display: none; */
-                transform: scale(0.7);
+                transform: scale(0.8);
                 transform-origin: left center;
-                /* Added this to align the scaled text properly */
             }
 
             .logo-text h1 {
@@ -961,11 +887,11 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 80px);
-                background: rgba(10, 10, 10, 0.95);
-                backdrop-filter: blur(20px);
+                background: rgb(0, 0, 0);
                 flex-direction: column;
                 justify-content: flex-start;
-                padding-top: 3rem;
+                gap: 1.5rem;
+                padding: 1rem 0;
                 transition: left 0.4s ease;
             }
 
@@ -1233,8 +1159,8 @@
                 <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Baps_logo.svg" alt="BAPS Logo"
                     class="logo-img">
                 <div class="logo-text">
-                    <h1>BAPS Shri Swaminarayan Mandir</h1>
-                    <p>Bochasan, India</p>
+                    <h1 style="font-size: 1.2rem;">BAPS Shri Swaminarayan Mandir</h1>
+                    <p style="font-size: 0.8rem;">Bochasan, India</p>
                 </div>
             </div>
 
@@ -1249,9 +1175,8 @@
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#aarti">Aarti</a></li>
                 <li><a href="#E-Books">E-Books</a></li>
-                <li><a href="attendance.html" class="attendance-btn">
-                        <i class="fas fa-lock"></i> Attendance Login
-                    </a></li>
+                <li><a href="#gurus">Founder & Successors</a></li>
+                <li><a href="attendance.html" class="attendance-btn">Login</a></li>
             </ul>
         </div>
     </nav>
@@ -1395,7 +1320,8 @@
                         <div style="margin-bottom: 2rem;">
                             <div class="interactive-element"
                                 style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                                <img src="/dates.jpg" alt="Dates Photo"
+                                <img src="dates.jpg" alt="Dates Photo"
+
                                     style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                         </div>
@@ -1526,6 +1452,32 @@
                 border-radius: 15px;
                 padding: 1.5rem;
                 border: 1px solid var(--glass-border);
+                transition: all 0.3s ease;
+                position: relative;
+            }
+
+            .sabha-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+                border-color: var(--accent-gold);
+            }
+
+            .sabha-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border-radius: 15px;
+                background: var(--gradient-primary);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                z-index: -1;
+            }
+
+            .sabha-card:hover::before {
+                opacity: 0.1;
             }
 
             .sabha-header {
@@ -1648,7 +1600,8 @@
         <div class="gallery-grid">
             <div class="gallery-item"
                 data-src="https://www.baps.org//Data/Sites/1/Media/LocationImages/128128-bochasan.jpg">
-                <img src="https://www.baps.org//Data/Sites/1/Media/LocationImages/128128-bochasan.jpg" alt="1">
+                <img src="https://www.baps.org//Data/Sites/1/Media/LocationImages/128128-bochasan.jpg" 
+                    alt="1">
             </div>
             <div class="gallery-item"
                 data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33501/WebImages/2025_07_09_001_Bochasan.jpg">
@@ -1667,34 +1620,34 @@
                     alt="4">
             </div>
             <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_010_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_010_Bochasan.jpg"
+                    alt="5">
+            </div>
+            <div class="gallery-item"
                 data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_001_Bochasan.jpg">
                 <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_001_Bochasan.jpg"
-                    alt="5">
+                    alt="6">
             </div>
             <div class="gallery-item"
                 data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_002_Bochasan.jpg">
                 <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_002_Bochasan.jpg"
-                    alt="6">
+                    alt="7">
             </div>
             <div class="gallery-item"
                 data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_003_Bochasan.jpg">
                 <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_003_Bochasan.jpg"
-                    alt="7">
+                    alt="8">
 
             </div>
             <div class="gallery-item"
                 data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_005_Bochasan.jpg">
                 <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_005_Bochasan.jpg"
-                    alt="8">
+                    alt="9">
             </div>
             <div class="gallery-item"
                 data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_006_Bochasan.jpg">
                 <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_006_Bochasan.jpg"
-                    alt="9">
-            </div>
-            <div class="gallery-item"
-                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_010_Bochasan.jpg">
-                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_010_Bochasan.jpg"
                     alt="10">
             </div>
             <div class="gallery-item"
@@ -1712,29 +1665,24 @@
                 <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_043_Bochasan.jpg"
                     alt="13">
             </div>
-            <div class="gallery-item"
-                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_32.jpg">
-                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_32.jpg"
-                    alt="14">
-            </div>
-            <div class="gallery-item"
-                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_73.jpg">
-                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30658/WebImages/2024_08_03_Bochasan_73.jpg"
-                    alt="15">
-            </div>
+            
             <div class="gallery-item"
                 data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33482/WebImages/2025_07_07_022_Bochasan.jpg">
                 <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33482/WebImages/2025_07_07_022_Bochasan.jpg"
+                    alt="14">
+            </div>
+
+             <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33544/WebImages/2025_07_18_064_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33544/WebImages/2025_07_18_064_Bochasan.jpg"
+                    alt="15">
+            </div>
+            <div class="gallery-item"
+                data-src="https://shorturl.at/BOnqe">
+                <img src="https://shorturl.at/BOnqe"
                     alt="16">
             </div>
-            <div class="gallery-item"
-                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/3775/WebImages/73-17f.jpg">
-                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/3775/WebImages/73-17f.jpg" alt="17">
-            </div>
-            <div class="gallery-item"
-                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/3775/WebImages/73-18f.jpg">
-                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/3775/WebImages/73-18f.jpg" alt="18">
-            </div>
+            
         </div>
         </section>
 
@@ -2086,407 +2034,731 @@
                 </div>
             </section>
         </main>
-
-
     </main>
 
 
-    <!-- Founder and Successors Section -->
-    <section class="section" id="gurus">
-        <div class="section-title">
-            <h2>Founder and Successors</h2>
+    <style>
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #ddd, transparent);
+            margin: 30px auto;
+            max-width: 800px;
+        }
+
+        .section-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 2rem auto;
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        /* Guru Cards Grid */
+        .guru-grid {
+            display: grid;
+            gap: 40px;
+            margin: 40px auto;
+            padding: 40px;
+            justify-content: center;
+            align-items: center;
+            max-width: 1400px;
+        }
+
+        .guru-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            max-width: 400px;
+            padding: 40px;
+        }
+
+        .guru-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
+
+        .guru-image {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .guru-overlay {
+            position: absolute;
+            padding: 20px;
+            color: gold;
+        }
+
+        .guru-name {
+            font-size: 2rem;
+            font-weight: 700;
+            padding-top: 20px;
+            /* Reduced padding to move text closer to image */
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+            position: relative;
+            /* Added positioning */
+            top: 100px;
+            /* Move text down slightly */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .guru-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+            position: relative;
+            top: 100px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .guru-details {
+            padding: 25px;
+            display: none;
+        }
+
+        .guru-card.active .guru-details {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .guru-period {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .guru-description {
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .guru-contribution {
+            background: #f8f9fa;
+            border-left: 4px solid var(--secondary);
+            padding: 12px 15px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #555;
+        }
+
+        .know-more-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: blue;
+            color: gold;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .guru-card.active .know-more-btn {
+            background: blue;
+        }
+
+
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .guru-grid {
+                gap: 30px;
+            }
+
+            .timeline-connectors {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 60px 0;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .guru-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--text-gray);
+            font-size: 1rem;
+            font-style: italic;
+        }
+    </style>
+
+    <div class="container">
+        <!-- Founder and Successors Section -->
+        <section class="section" id="gurus">
+            <div class="section-title">
+                <h2>Founder and Successors</h2>
+            </div>
+
             <div class="section-divider"></div>
-            <section class="section" id="about">
-                <div class="section-title">
-                    <p
-                        style="text-align: center; max-width: 800px; margin: 2rem auto; color: var(--text-gray); font-size: 1.2rem; line-height: 1.8;">
-                        The BAPS Swaminarayan Sanstha sustains the universal value of Hindu culture—encouraging devotion
-                        to God by imbibing such faith in all aspects of life.
-                    </p>
+
+            <p class="section-description">
+                The BAPS Swaminarayan Sanstha sustains the universal value of Hindu culture—encouraging devotion
+                to God by imbibing such faith in all aspects of life.
+            </p>
+
+            <div class="guru-grid">
+
+                <!-- Bhagwan Swaminarayan -->
+                <div class="guru-card">
+                    <span style="color: #ffd700;">BHAGWAN SWAMINARAYAN</span> <br>
+                    <span style="color: #ffd700;">Founder of Swaminarayan Sampraday</span>
+                    <div class="guru-image-container">
+                        <img src="https://psm100.org/wp-content/uploads/2022/08/bhagwan-swami-img.png"
+                            alt="BHAGWAN SWAMINARAYAN" class="guru-image">
+                    </div>
+                    <div class="guru-details">
+                        <p class="guru-period">1781 - 1830</p>
+                        <p class="guru-description">Bhagwan Swaminarayan is the founder of the Swaminarayan Sampraday.
+                            He is worshipped as the supreme God by his followers. His teachings are encapsulated in the
+                            Shikshapatri and Vachanamrut.</p>
+                        <p class="guru-contribution">"In happiness and sorrow, in joy and grief, consider God as your
+                            sole refuge."</p>
+                    </div>
+                    <button class="know-more-btn">Know More</button>
                 </div>
-                <div>
-                    <div>
-                        <div class="card-content">
-                            <img src="https://psm100.org/wp-content/uploads/2022/08/bhagwan-swami-img.png"
-                                alt="BHAGWAN SWAMINARAYAN" class="guru-image">
-                        </div>
-                        <div>
-                            <h3>BHAGWAN SWAMINARAYAN</h3>
-                        </div>
+
+                <!-- Gunatitanand Swami -->
+                <div class="guru-card">
+                    <span style="color: #ffd700;">GUNATITANAND SWAMI</span> <br>
+                    <span style="color: #ffd700;">First Spiritual Successor</span>
+                    <div class="guru-image-container">
+                        <img src="https://psm100.org/wp-content/uploads/2022/08/aksharbrahma-img.png"
+                            alt="GUNATITANAND SWAMI" class="guru-image">
                     </div>
-                    <div class="section-divider"></div>
-                    <div>
-                        <div class="card-content">
-                            <img src="https://psm100.org/wp-content/uploads/2022/08/aksharbrahma-img.png"
-                                alt="GUNATITANAND SWAMI" class="guru-image">
-                        </div>
-                        <div>
-                            <h3>GUNATITANAND SWAMI</h3>
-                        </div>
+                    <div class="guru-details">
+                        <p class="guru-period">1785 - 1867</p>
+                        <p class="guru-description">Gunatitanand Swami was the first spiritual successor of Bhagwan
+                            Swaminarayan. He served as the Mahant of Junagadh mandir for 40 years and his teachings are
+                            compiled in the Swamini Vato.</p>
+                        <p class="guru-contribution">"Remain in the awareness of God and you will not fall prey to
+                            worldly temptations."</p>
                     </div>
-                    <div class="section-divider"></div>
-                    <div>
-                        <div class="card-content">
-                            <img src="https://psm100.org/wp-content/uploads/2022/08/brahmaswarup-img.png"
-                                alt="BHAGATJI MAHARAJ" class="guru-image">
-                        </div>
-                        <div>
-                            <h3>BHAGATJI MAHARAJ</h3>
-                        </div>
-                    </div>
-                    <div class="section-divider"></div>
-                    <div>
-                        <div class="card-content">
-                            <img src="https://psm100.org/wp-content/uploads/2022/08/brahmaswarup-shastriji-img.png"
-                                alt="SHASTRIJI MAHARAJ" class="guru-image">
-                        </div>
-                        <div>
-                            <h3>SHASTRIJI MAHARAJ</h3>
-                        </div>
-                    </div>
-                    <div class="section-divider"></div>
-                    <div>
-                        <div class="card-content">
-                            <img src="https://psm100.org/wp-content/uploads/2022/08/brahmaswarup-yogiji-img.png"
-                                alt="YOGIJI MAHARAJ" class="guru-image">
-                        </div>
-                        <div>
-                            <h3>YOGIJI MAHARAJ</h3>
-                        </div>
-                    </div>
-                    <div class="section-divider"></div>
-                    <div>
-                        <div class="card-content">
-                            <img src="https://psm100.org/wp-content/uploads/2022/08/brahmaswarup-pramukh-img.png"
-                                alt="PRAMUKH SWAMI MAHARAJ" class="guru-image">
-                        </div>
-                        <div>
-                            <h3>PRAMUKH SWAMI MAHARAJ</h3>
-                        </div>
-                    </div>
-                    <div class="section-divider"></div>
-                    <div>
-                        <div class="card-content">
-                            <img src="https://psm100.org/wp-content/uploads/2022/08/pragat-brahmaswarup-mahant.png"
-                                alt="MAHANT SWAMI MAHARAJ" class="guru-image">
-                        </div>
-                        <div>
-                            <h3>MAHANT SWAMI MAHARAJ</h3>
-                        </div>
-                    </div>
+                    <button class="know-more-btn">Know More</button>
                 </div>
-            </section>
 
-            <style>
-                .guru-image {
-                    width: 250px;
-                    height: 250px;
-                    object-fit: cover;
-                    border-radius: 10px;
-                    background-color: #f5f5f5;
-                }
-            </style>
+                <!-- Bhagatji Maharaj -->
+                <div class="guru-card">
+                    <span style="color: #ffd700;">BHAGATJI MAHARAJ</span> <br>
+                    <span style="color: #ffd700;">Second Spiritual Successor</span>
+                    <div class="guru-image-container">
+                        <img src="https://psm100.org/wp-content/uploads/2022/08/brahmaswarup-img.png"
+                            alt="BHAGATJI MAHARAJ" class="guru-image">
+                    </div>
+                    <div class="guru-details">
+                        <p class="guru-period">1829 - 1897</p>
+                        <p class="guru-description">Bhagatji Maharaj was the second spiritual successor in the lineage.
+                            He emphasized the importance of the Guru-disciple relationship and propagated the philosophy
+                            of Akshar-Purushottam.</p>
+                        <p class="guru-contribution">"To attain God, one must surrender to the God-realized Guru."</p>
+                    </div>
+                    <button class="know-more-btn">Know More</button>
+                </div>
 
+                <!-- Shastriji Maharaj -->
+                <div class="guru-card">
+                    <span style="color: #ffd700;">SHASTRIJI MAHARAJ</span> <br>
+                    <span style="color: #ffd700;">Third Spiritual Successor</span>
+                    <div class="guru-image-container">
+                        <img src="https://psm100.org/wp-content/uploads/2022/08/brahmaswarup-shastriji-img.png"
+                            alt="SHASTRIJI MAHARAJ" class="guru-image">
+                    </div>
+                    <div class="guru-details">
+                        <p class="guru-period">1865 - 1951</p>
+                        <p class="guru-description">Shastriji Maharaj formally established the Bochasanwasi Shri Akshar
+                            Purushottam Swaminarayan Sanstha (BAPS) in 1907. He built six magnificent mandirs and
+                            initiated 500 paramhansas.</p>
+                        <p class="guru-contribution">"The true disciple is one who obeys the commands of the Guru and
+                            God."</p>
+                    </div>
+                    <button class="know-more-btn">Know More</button>
+                </div>
 
-            <!-- Advanced Modal -->
-            <div class="modal" id="imageModal">
-                <div class="modal-content">
-                    <div class="modal-controls">
-                        <div class="modal-btn" id="modalFullscreen">
-                            <i class="fas fa-expand"></i>
-                        </div>
-                        <div class="modal-btn" id="modalDownload">
-                            <i class="fas fa-download"></i>
-                        </div>
-                        <div class="modal-btn" id="modalClose">
-                            <i class="fas fa-times"></i>
-                        </div>
+                <!-- Yogiji Maharaj -->
+                <div class="guru-card">
+                    <span style="color: #ffd700;">YOGIJI MAHARAJ</span> <br>
+                    <span style="color: #ffd700;">Fourth Spiritual Successor</span>
+                    <div class="guru-image-container">
+                        <img src="https://psm100.org/wp-content/uploads/2022/08/brahmaswarup-yogiji-img.png"
+                            alt="YOGIJI MAHARAJ" class="guru-image">
                     </div>
-                    <div class="modal-nav modal-prev" id="modalPrev">
-                        <i class="fas fa-chevron-left"></i>
+                    <div class="guru-details">
+                        <p class="guru-period">1892 - 1971</p>
+                        <p class="guru-description">Yogiji Maharaj was known for his boundless love and compassion. He
+                            initiated children and youth into the Swaminarayan faith and sent swamis to East Africa, UK
+                            and USA to spread the faith globally.</p>
+                        <p class="guru-contribution">"Fill your heart with love for God and hatred for no one."</p>
                     </div>
-                    <div class="modal-nav modal-next" id="modalNext">
-                        <i class="fas fa-chevron-right"></i>
+                    <button class="know-more-btn">Know More</button>
+                </div>
+
+                <!-- Pramukh Swami Maharaj -->
+                <div class="guru-card">
+                    <span style="color: #ffd700;">PRAMUKH SWAMI MAHARAJ</span> <br>
+                    <span style="color: #ffd700;">Fifth Spiritual Successor</span>
+                    <div class="guru-image-container">
+                        <img src="https://psm100.org/wp-content/uploads/2022/08/brahmaswarup-pramukh-img.png"
+                            alt="PRAMUKH SWAMI MAHARAJ" class="guru-image">
                     </div>
-                    <img class="modal-image" id="modalImage" src="/placeholder.svg" alt="Gallery Image">
+                    <div class="guru-details">
+                        <p class="guru-period">1921 - 2016</p>
+                        <p class="guru-description">Pramukh Swami Maharaj was the fifth spiritual successor who
+                            transformed BAPS into a global organization. Under his leadership, over 1,100 temples were
+                            built worldwide, including the Akshardham complexes.</p>
+                        <p class="guru-contribution">"In the joy of others, lies our own."</p>
+                    </div>
+                    <button class="know-more-btn">Know More</button>
+                </div>
+
+                <!-- Mahant Swami Maharaj -->
+                <div class="guru-card active">
+                    <span style="color: #ffd700;">MAHANT SWAMI MAHARAJ</span> <br>
+                    <span style="color: #ffd700;">Sixth Spiritual Successor</span>
+                    <div class="guru-image-container">
+                        <img src="https://psm100.org/wp-content/uploads/2022/08/pragat-brahmaswarup-mahant.png"
+                            alt="MAHANT SWAMI MAHARAJ" class="guru-image">
+                    </div>
+                    <div class="guru-details">
+                        <p class="guru-period">1933 - Present</p>
+                        <p class="guru-description">Mahant Swami Maharaj is the present and sixth spiritual successor of
+                            Bhagwan Swaminarayan. He was ordained by Pramukh Swami Maharaj and travels extensively to
+                            inspire devotees worldwide.</p>
+                        <p class="guru-contribution">"Progress is achieved by instilling God in our lives."</p>
+                    </div>
+                    <button class="know-more-btn">Show Less</button>
                 </div>
             </div>
 
-            <!-- Footer -->
-            <footer class="footer">
-                <div class="footer-content">
-                    <h3 class="footer-title">BAPS Shri Swaminarayan Mandir, Bochasan</h3>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/bapsswaminarayansanstha" class="social-link">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://www.instagram.com/baps/" class="social-link">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.youtube.com/user/BAPSChannel" class="social-link">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a href="https://twitter.com/baps" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </div>
-                    <p style="color: var(--text-gray); font-weight: 300; line-height: 1.6;">
-                        © 1999-2025 Bochasanwasi Shri Akshar Purushottam Swaminarayan Sanstha (BAPS Swaminarayan
-                        Sanstha).<br>
-                        All Rights Reserved. | Designed with Divine Inspiration
-                    </p>
+            <p class="footer-note">The spiritual lineage of Bhagwan Swaminarayan continues to guide millions worldwide
+            </p>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const guruCards = document.querySelectorAll('.guru-card');
+            const knowMoreButtons = document.querySelectorAll('.know-more-btn');
+
+            // Function to toggle guru details
+            function toggleDetails(card) {
+                const isActive = card.classList.contains('active');
+
+                // Close all cards first
+                guruCards.forEach(c => {
+                    c.classList.remove('active');
+                    const btn = c.querySelector('.know-more-btn');
+                    btn.textContent = 'Know More';
+                });
+
+                // If card wasn't active, open it
+                if (!isActive) {
+                    card.classList.add('active');
+                    const btn = card.querySelector('.know-more-btn');
+                    btn.textContent = 'Show Less';
+
+                    // Scroll to the card if it's not in view
+                    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+
+            // Add event listeners to buttons
+            knowMoreButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const card = this.closest('.guru-card');
+                    toggleDetails(card);
+                });
+            });
+
+            // Add event listeners to cards for mobile tap
+            guruCards.forEach(card => {
+                card.addEventListener('click', function (e) {
+                    // Only trigger on mobile or if not clicking the button
+                    if (window.innerWidth <= 768 && !e.target.closest('.know-more-btn')) {
+                        toggleDetails(this);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+
+    <!-- Advanced Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <div class="modal-controls">
+                <div class="modal-btn" id="modalFullscreen">
+                    <i class="fas fa-expand"></i>
                 </div>
-            </footer>
+                <div class="modal-btn" id="modalDownload">
+                    <i class="fas fa-download"></i>
+                </div>
+                <div class="modal-btn" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-nav modal-prev" id="modalPrev">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="modal-nav modal-next" id="modalNext">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <img class="modal-image" id="modalImage" src="/placeholder.svg" alt="Gallery Image">
+        </div>
+    </div>
 
-            <script>
-                // Create Floating Particles
-                function createParticles() {
-                    const particlesContainer = document.getElementById('particles');
-                    const particleCount = 50;
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3 class="footer-title">BAPS Shri Swaminarayan Mandir, Bochasan</h3>
+            <div class="social-links">
+                <a href="https://www.facebook.com/bapsswaminarayansanstha" class="social-link">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/baps/" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/user/BAPSChannel" class="social-link">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://twitter.com/baps" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+            <p style="color: var(--text-gray); font-weight: 300; line-height: 1.6;">
+                © 1999-2025 Bochasanwasi Shri Akshar Purushottam Swaminarayan Sanstha (BAPS Swaminarayan
+                Sanstha).<br>
+                All Rights Reserved. | Designed with Divine Inspiration
+            </p>
+        </div>
+    </footer>
 
-                    for (let i = 0; i < particleCount; i++) {
-                        const particle = document.createElement('div');
-                        particle.className = 'particle';
-                        particle.style.left = Math.random() * 100 + '%';
-                        particle.style.animationDelay = Math.random() * 15 + 's';
-                        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                        particlesContainer.appendChild(particle);
-                    }
+    <script>
+        // Create Floating Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        // Close mobile menu when clicking on links
+        navLinks.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                navLinks.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // Hero Slider
+        let currentHeroSlide = 0;
+        const heroSlides = document.querySelectorAll('.hero-slide');
+
+        function showHeroSlide(index) {
+            heroSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextHeroSlide() {
+            currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+            showHeroSlide(currentHeroSlide);
+        }
+
+        // Auto-advance hero slider
+        setInterval(nextHeroSlide, 6000);
+
+        // Diwali Event Slider
+        let currentDiwaliSlide = 0;
+        const diwaliSlides = document.querySelectorAll('#diwaliSlider .event-slide');
+
+        function showDiwaliSlide(index) {
+            diwaliSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextDiwaliSlide() {
+            currentDiwaliSlide = (currentDiwaliSlide + 1) % diwaliSlides.length;
+            showDiwaliSlide(currentDiwaliSlide);
+        }
+
+        // Auto-advance Diwali slider
+        setInterval(nextDiwaliSlide, 4000);
+
+        // Guru Purnima Event Slider
+        let currentGuruPurnimaSlide = 0;
+        const guruPurnimaSlides = document.querySelectorAll('#guruPurnimaSlider .event-slide');
+
+        function showGuruPurnimaSlide(index) {
+            guruPurnimaSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextGuruPurnimaSlide() {
+            currentGuruPurnimaSlide = (currentGuruPurnimaSlide + 1) % guruPurnimaSlides.length;
+            showGuruPurnimaSlide(currentGuruPurnimaSlide);
+        }
+
+        // Auto-advance Guru Purnima slider with a slightly different interval to create visual variety
+        setInterval(nextGuruPurnimaSlide, 4500);
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
+            });
+        }, observerOptions);
 
-                // Navbar Scroll Effect
-                window.addEventListener('scroll', () => {
-                    const navbar = document.getElementById('navbar');
-                    if (window.scrollY > 100) {
-                        navbar.classList.add('scrolled');
-                    } else {
-                        navbar.classList.remove('scrolled');
-                    }
-                });
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
 
-                // Mobile Menu Toggle
-                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-                const navLinks = document.getElementById('navLinks');
+        // Gallery Modal
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalClose = document.getElementById('modalClose');
+        const modalPrev = document.getElementById('modalPrev');
+        const modalNext = document.getElementById('modalNext');
+        const modalFullscreen = document.getElementById('modalFullscreen');
+        const modalDownload = document.getElementById('modalDownload');
+        const galleryItems = document.querySelectorAll('.gallery-item');
 
-                mobileMenuBtn.addEventListener('click', () => {
-                    navLinks.classList.toggle('active');
-                    const icon = mobileMenuBtn.querySelector('i');
-                    icon.className = navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
-                });
+        let currentImageIndex = 0;
+        const galleryImages = Array.from(galleryItems).map(item => item.dataset.src);
 
-                // Close mobile menu when clicking on links
-                navLinks.addEventListener('click', (e) => {
-                    if (e.target.tagName === 'A') {
-                        navLinks.classList.remove('active');
-                        const icon = mobileMenuBtn.querySelector('i');
-                        icon.className = 'fas fa-bars';
-                    }
-                });
+        function openModal(index) {
+            currentImageIndex = index;
+            modalImage.src = galleryImages[index];
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
-                // Hero Slider
-                let currentHeroSlide = 0;
-                const heroSlides = document.querySelectorAll('.hero-slide');
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
 
-                function showHeroSlide(index) {
-                    heroSlides.forEach((slide, i) => {
-                        slide.classList.toggle('active', i === index);
+        function navigateImage(direction) {
+            currentImageIndex = (currentImageIndex + direction + galleryImages.length) % galleryImages.length;
+            modalImage.src = galleryImages[currentImageIndex];
+        }
+
+        // Gallery click handlers
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => openModal(index));
+        });
+
+        // Modal controls
+        modalClose.addEventListener('click', closeModal);
+        modalPrev.addEventListener('click', () => navigateImage(-1));
+        modalNext.addEventListener('click', () => navigateImage(1));
+
+        // Fullscreen functionality
+        modalFullscreen.addEventListener('click', () => {
+            if (modalImage.requestFullscreen) {
+                modalImage.requestFullscreen();
+            }
+        });
+
+        // Download functionality
+        modalDownload.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.href = galleryImages[currentImageIndex];
+            link.download = `baps-bochasan-${currentImageIndex + 1}.jpg`;
+            link.click();
+        });
+
+        // Close modal when clicking outside image
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (modal.classList.contains('active')) {
+                if (e.key === 'Escape') closeModal();
+                if (e.key === 'ArrowLeft') navigateImage(-1);
+                if (e.key === 'ArrowRight') navigateImage(1);
+                if (e.key === 'f' || e.key === 'F') modalFullscreen.click();
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
                     });
                 }
+            });
+        });
 
-                function nextHeroSlide() {
-                    currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
-                    showHeroSlide(currentHeroSlide);
+        // Initialize particles
+        createParticles();
+
+        // Add some interactive sound effects (optional)
+        function playClickSound() {
+            // You can add audio elements here for click sounds
+        }
+
+        // Add click sound to interactive elements
+        document.querySelectorAll('.interactive-element, .cta-btn, .glass-card').forEach(element => {
+            element.addEventListener('click', playClickSound);
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroSlides = document.querySelectorAll('.hero-slide img');
+            heroSlides.forEach(slide => {
+                slide.style.transform = `translateY(${scrolled * 0.5}px)`;
+            });
+        });
+
+        // Add typing effect to hero title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
                 }
+            }
+            type();
+        }
+    </script>
 
-                // Auto-advance hero slider
-                setInterval(nextHeroSlide, 6000);
-
-                // Diwali Event Slider
-                let currentDiwaliSlide = 0;
-                const diwaliSlides = document.querySelectorAll('#diwaliSlider .event-slide');
-
-                function showDiwaliSlide(index) {
-                    diwaliSlides.forEach((slide, i) => {
-                        slide.classList.toggle('active', i === index);
-                    });
-                }
-
-                function nextDiwaliSlide() {
-                    currentDiwaliSlide = (currentDiwaliSlide + 1) % diwaliSlides.length;
-                    showDiwaliSlide(currentDiwaliSlide);
-                }
-
-                // Auto-advance Diwali slider
-                setInterval(nextDiwaliSlide, 4000);
-
-                // Guru Purnima Event Slider
-                let currentGuruPurnimaSlide = 0;
-                const guruPurnimaSlides = document.querySelectorAll('#guruPurnimaSlider .event-slide');
-
-                function showGuruPurnimaSlide(index) {
-                    guruPurnimaSlides.forEach((slide, i) => {
-                        slide.classList.toggle('active', i === index);
-                    });
-                }
-
-                function nextGuruPurnimaSlide() {
-                    currentGuruPurnimaSlide = (currentGuruPurnimaSlide + 1) % guruPurnimaSlides.length;
-                    showGuruPurnimaSlide(currentGuruPurnimaSlide);
-                }
-
-                // Auto-advance Guru Purnima slider with a slightly different interval to create visual variety
-                setInterval(nextGuruPurnimaSlide, 4500);
-
-                // Intersection Observer for Animations
-                const observerOptions = {
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -100px 0px'
-                };
-
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                        }
-                    });
-                }, observerOptions);
-
-                // Observe all sections
-                document.querySelectorAll('.section').forEach(section => {
-                    observer.observe(section);
-                });
-
-                // Gallery Modal
-                const modal = document.getElementById('imageModal');
-                const modalImage = document.getElementById('modalImage');
-                const modalClose = document.getElementById('modalClose');
-                const modalPrev = document.getElementById('modalPrev');
-                const modalNext = document.getElementById('modalNext');
-                const modalFullscreen = document.getElementById('modalFullscreen');
-                const modalDownload = document.getElementById('modalDownload');
-                const galleryItems = document.querySelectorAll('.gallery-item');
-
-                let currentImageIndex = 0;
-                const galleryImages = Array.from(galleryItems).map(item => item.dataset.src);
-
-                function openModal(index) {
-                    currentImageIndex = index;
-                    modalImage.src = galleryImages[index];
-                    modal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                }
-
-                function closeModal() {
-                    modal.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-
-                function navigateImage(direction) {
-                    currentImageIndex = (currentImageIndex + direction + galleryImages.length) % galleryImages.length;
-                    modalImage.src = galleryImages[currentImageIndex];
-                }
-
-                // Gallery click handlers
-                galleryItems.forEach((item, index) => {
-                    item.addEventListener('click', () => openModal(index));
-                });
-
-                // Modal controls
-                modalClose.addEventListener('click', closeModal);
-                modalPrev.addEventListener('click', () => navigateImage(-1));
-                modalNext.addEventListener('click', () => navigateImage(1));
-
-                // Fullscreen functionality
-                modalFullscreen.addEventListener('click', () => {
-                    if (modalImage.requestFullscreen) {
-                        modalImage.requestFullscreen();
-                    }
-                });
-
-                // Download functionality
-                modalDownload.addEventListener('click', () => {
-                    const link = document.createElement('a');
-                    link.href = galleryImages[currentImageIndex];
-                    link.download = `baps-bochasan-${currentImageIndex + 1}.jpg`;
-                    link.click();
-                });
-
-                // Close modal when clicking outside image
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        closeModal();
-                    }
-                });
-
-                // Keyboard navigation
-                document.addEventListener('keydown', (e) => {
-                    if (modal.classList.contains('active')) {
-                        if (e.key === 'Escape') closeModal();
-                        if (e.key === 'ArrowLeft') navigateImage(-1);
-                        if (e.key === 'ArrowRight') navigateImage(1);
-                        if (e.key === 'f' || e.key === 'F') modalFullscreen.click();
-                    }
-                });
-
-                // Smooth scroll for navigation links
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            const navbarHeight = document.querySelector('.navbar').offsetHeight;
-                            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20; // Added extra 20px padding
-                            window.scrollTo({
-                                top: targetPosition,
-                                behavior: 'smooth'
-                            });
-                        }
-                    });
-                });
-
-                // Initialize particles
-                createParticles();
-
-                // Add some interactive sound effects (optional)
-                function playClickSound() {
-                    // You can add audio elements here for click sounds
-                }
-
-                // Add click sound to interactive elements
-                document.querySelectorAll('.interactive-element, .cta-btn, .glass-card').forEach(element => {
-                    element.addEventListener('click', playClickSound);
-                });
-
-                // Parallax effect for hero section
-                window.addEventListener('scroll', () => {
-                    const scrolled = window.pageYOffset;
-                    const heroSlides = document.querySelectorAll('.hero-slide img');
-                    heroSlides.forEach(slide => {
-                        slide.style.transform = `translateY(${scrolled * 0.5}px)`;
-                    });
-                });
-
-                // Add typing effect to hero title
-                function typeWriter(element, text, speed = 100) {
-                    let i = 0;
-                    element.innerHTML = '';
-                    function type() {
-                        if (i < text.length) {
-                            element.innerHTML += text.charAt(i);
-                            i++;
-                            setTimeout(type, speed);
-                        }
-                    }
-                    type();
-                }
-            </script>
-
-            <script>
-                // Ensure page loads from top when refreshed
-                window.onbeforeunload = function () {
-                    window.scrollTo(0, 0);
-                }
-            </script>
+    <script>
+        // Ensure page loads from top when refreshed
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        }
+    </script>
 </body>
 
 </html>
