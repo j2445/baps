@@ -2,684 +2,2757 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/4/4a/Baps_logo.svg" type="image/svg+xml">
-  <title>Yuvak Mandal Attendance</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  
-  <style>
-    :root {
-      --primary: #0d47a1;
-      --primary-light: #1565c0;
-      --present-color: #4CAF50;
-      --bg-color: #f5f7fa;
-      --card-color: #ffffff;
-      --text-color: #333333;
-      --border-color: #e0e0e0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="noN5MegKbNjByQ7U6PfNi_OwJqnO-aViQermaGv9808" />
+    <title>BAPS Shri Swaminarayan Mandir - Bochasan</title>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/4/4a/Baps_logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <style>
+        :root {
+            --primary-dark: #0a0a0a;
+            --secondary-dark: #1a1a1a;
+            --accent-gold: #ffd700;
+            --accent-amber: #ff8c00;
+            --text-light: #ffffff;
+            --text-gray: #a0a0a0;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --neon-green: #00ff88;
+            --neon-blue: #00d4ff;
+            --gradient-primary: linear-gradient(135deg, #ffd700, #ff8c00);
+            --gradient-secondary: linear-gradient(135deg, #00ff88, #00d4ff);
+            --gradient-dark: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+        }
 
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.5;
-      padding-bottom: 20px;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .navbar {
-      background-color: var(--primary);
-      color: white;
-      padding: 15px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-    .navbar-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
 
-    .navbar img {
-      height: 30px;
-      filter: brightness(0) invert(1);
-    }
 
-    .container {
-      max-width: 100%;
-      padding: 15px;
-    }
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
 
-    .search-container {
-      position: sticky;
-      top: 60px;
-      background-color: var(--bg-color);
-      padding: 10px 0;
-      z-index: 90;
-    }
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+            opacity: 0.6;
+        }
 
-    .search-input {
-      width: 100%;
-      padding: 12px 15px;
-      font-size: 1rem;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      background-color: var(--card-color);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    }
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
 
-    .search-input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(13, 71, 161, 0.2);
-    }
+            10% {
+                opacity: 0.6;
+            }
 
-    .name-list {
-      margin-top: 10px;
-    }
+            90% {
+                opacity: 0.6;
+            }
 
-    .person {
-      background-color: var(--card-color);
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-      transition: all 0.2s ease;
-    }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
 
-    .person.present {
-      background-color: rgba(76, 175, 80, 0.1);
-      border-left: 4px solid var(--present-color);
-    }
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
 
-    .person-name {
-      font-weight: 500;
-      font-size: 1rem;
-    }
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
 
-    .present-btn {
-      background-color: var(--present-color);
-      color: white;
-      border: none;
-      border-radius: 6px;
-      padding: 8px 15px;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
 
-    .present-btn:active {
-      transform: scale(0.95);
-    }
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: slideInLeft 1s ease-out;
+        }
 
-    .summary-card {
-      background-color: var(--card-color);
-      border-radius: 10px;
-      padding: 15px;
-      margin-top: 20px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-      text-align: center;
-    }
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            filter: brightness(0) invert(1) drop-shadow(0 0 10px var(--text-light));
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
 
-    .summary-title {
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: var(--primary);
-    }
+        @keyframes logoGlow {
+            from {
+                filter: brightness(0) invert(1) drop-shadow(0 0 10px var(--text-light));
+            }
 
-    .stats {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 10px;
-    }
+            to {
+                filter: brightness(0) invert(1) drop-shadow(0 0 20px var(--text-light)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.7));
+            }
+        }
 
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+        .logo-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-    .stat-value {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
+        .logo-text p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            font-weight: 300;
+        }
 
-    .stat-label {
-      font-size: 0.8rem;
-      color: #666;
-    }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+            animation: slideInRight 1s ease-out;
+        }
 
-    .action-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 20px;
-    }
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+        }
 
-    .action-btn {
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 12px;
-      font-size: 1rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
 
-    .action-btn:active {
-      background-color: var(--primary-light);
-      transform: scale(0.98);
-    }
+        .nav-links a:hover::before {
+            width: 100%;
+        }
 
-    .action-btn.secondary {
-      background-color: white;
-      color: var(--primary);
-      border: 1px solid var(--primary);
-    }
+        .nav-links a:hover {
+            color: var(--accent-gold);
+            text-shadow: 0 0 10px var(--accent-gold);
+        }
 
-    /* Code Entry Modal */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(12, 107, 110, 0.993);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
+        .attendance-btn {
+            color: var(--text-light);
+            padding: 0.85rem 2rem;
+            font-weight: 700;
+            text-decoration: none;
+            backdrop-filter: blur(15px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
 
-    .modal-content {
-      background-color: var(--card-color);
-      border-radius: 15px;
-      width: 100%;
-      max-width: 350px;
-      height: 100%;
-      max-height: fit-content;
-      padding: 25px;
-      padding-bottom: 50px;
-      text-align: center;
-      animation: modalFadeIn 0.3s;
-      margin: 0 auto;
-      margin-top: 50px;
-    }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+        }
 
-    @keyframes modalFadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        .mobile-menu-btn:hover {
+            color: var(--accent-gold);
+            transform: scale(1.1);
+        }
 
-    .modal-logo {
-      height: 60px;
-      margin-bottom: 15px;
-    }
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .modal-title {
-      font-size: 1.3rem;
-      margin-bottom: 10px;
-      color: var(--primary);
-    }
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1.5s ease-out 0.5s both;
+        }
 
-    .modal-text {
-      color: #666;
-      margin-bottom: 20px;
-    }
 
-    .code-input {
-      width: 100%;
-      padding: 15px;
-      font-size: 1.2rem;
-      text-align: center;
-      border: 2px solid var(--border-color);
-      border-radius: 8px;
-      margin-bottom: 15px;
-      letter-spacing: 5px;
-    }
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
 
-    .code-input:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-    .error-message {
-      color: #f44336;
-      margin-bottom: 15px;
-      min-height: 20px;
-    }
+        .cta-btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
 
-    .timer-message {
-      color: #f44336;
-      margin-bottom: 15px;
-      font-weight: bold;
-    }
+        .cta-primary {
+            background: var(--gradient-primary);
+            color: var(--primary-dark);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
 
-    /* Responsive adjustments */
-    @media (max-width: 400px) {
-      .navbar-title {
-        font-size: 1.1rem;
-      }
-      
-      .person {
-        padding: 12px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
-      
-      .present-btn {
-        width: 100%;
-        justify-content: center;
-      }
-      
-      .stats {
-        flex-wrap: wrap;
-        gap: 15px;
-      }
-      
-      .stat-item {
-        width: 45%;
-      }
-    }
-  </style>
+        .cta-secondary {
+            background: var(--glass-bg);
+            color: var(--text-light);
+            border: 1px solid var(--glass-border);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+        }
+
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 1;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 80px;
+            /* Change from 0 to navbar height */
+            left: 0;
+            width: 100%;
+            height: calc(100% - 80px);
+            /* Adjust height to account for top offset */
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide img {
+            min-width: 100%;
+            min-height: 100%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Keep as cover for full background effect */
+            object-position: top center;
+            /* Focus on the top of the image */
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 80px;
+            /* Change from 0 to navbar height */
+            left: 0;
+            width: 100%;
+            height: calc(100% - 80px);
+            /* Adjust height to account for top offset */
+            background: radial-gradient(circle at center, transparent 0%, rgba(10, 10, 10, 0.7) 100%);
+            z-index: 1;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator i {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            filter: drop-shadow(0 0 10px var(--accent-gold));
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-divider {
+            width: 120px;
+            height: 4px;
+            background: var(--gradient-primary);
+            margin: 0 auto;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -10px;
+            right: -10px;
+            bottom: -2px;
+            background: var(--gradient-primary);
+            border-radius: 4px;
+            filter: blur(8px);
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        /* Glass Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-gold);
+        }
+
+        .glass-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .card-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 140, 0, 0.1));
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .card-header i {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            filter: drop-shadow(0 0 10px var(--accent-gold));
+        }
+
+        .card-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        /* Interactive Elements */
+        .interactive-element {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-element:hover {
+            filter: brightness(1.2);
+        }
+
+        /* Event Slider */
+        .event-slider {
+            position: relative;
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .event-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: all 0.6s ease;
+            transform: scale(1.1);
+        }
+
+        .event-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .event-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8) contrast(1.1);
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+            filter: brightness(0.95) contrast(1.05);
+            transform: scale(1);
+        }
+
+
+
+        /* Advanced Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            animation: modalSlideIn 0.4s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: scale(0.8) translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-controls {
+            position: absolute;
+            top: -60px;
+            right: 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .modal-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            color: var(--text-light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-btn:hover {
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            color: var(--text-light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-nav:hover {
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .modal-prev {
+            left: 2rem;
+        }
+
+        .modal-next {
+            right: 2rem;
+        }
+
+        /* Timing Cards */
+        .timing-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .timing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.1);
+            border-color: var(--accent-gold);
+        }
+
+        .timing-card-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.1));
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .timing-card-header.aarti {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 140, 0, 0.1));
+        }
+
+        .timing-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .timing-row:last-child {
+            border-bottom: none;
+        }
+
+        .timing-label {
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        .timing-value {
+            color: var(--text-gray);
+            font-weight: 300;
+        }
+
+        /* Footer */
+        .footer {
+            background: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffd700" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ff8c00" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23ffd700" opacity="0.2"/><circle cx="10" cy="90" r="0.5" fill="%23ff8c00" opacity="0.2"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+            animation: footerPattern 30s linear infinite;
+        }
+
+        @keyframes footerPattern {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+
+            100% {
+                transform: translateX(100px) translateY(100px);
+            }
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            height: auto;
+        }
+
+        .footer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .social-link:hover::before {
+            left: 0;
+        }
+
+        .social-link:hover {
+            color: var(--primary-dark);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 1250px) {
+
+
+            .logo-section {
+                gap: 0.5rem;
+            }
+
+            .logo-text {
+                transform: scale(0.8);
+                transform-origin: left center;
+            }
+
+            .logo-text h1 {
+                font-size: 1.3rem;
+            }
+
+            .logo-text p {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgb(0, 0, 0);
+                flex-direction: column;
+                justify-content: flex-start;
+                gap: 1.5rem;
+                padding: 1rem 0;
+                transition: left 0.4s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main-content {
+                padding: 4rem 1rem;
+            }
+
+            .modal-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .modal-prev {
+                left: 1rem;
+            }
+
+            .modal-next {
+                right: 1rem;
+            }
+        }
+
+        /* Utility Animations */
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--secondary-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-gold);
+        }
+    </style>
 </head>
 
 <body>
-
-  <!-- Code Entry Modal -->
-  <div id="codeModal" class="modal" style="display: block;">
-    <div class="modal-content">
-      <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Baps_logo.svg" class="modal-logo">
-      <h2 class="modal-title">Enter Access Code</h2>
-      <p class="modal-text">Please enter the 4-digit code to access the system</p>
-      <input type="password" id="accessCode" class="code-input" maxlength="4" placeholder="____" disabled>
-      <div id="codeError" class="error-message"></div>
-      <div id="timerMessage" class="timer-message" style="display: none;"></div>
-      <button id="submitBtn" class="action-btn" onclick="verifyCode()" disabled style="margin: 0 auto; display: block;">
-        <i class="fas fa-unlock-alt"></i> Submit
-      </button>
-    </div>
-  </div>
-
-  <div class="navbar">
-    <div class="navbar-title">
-      <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Baps_logo.svg">
-      <span>Yuvak Mandal Attendance</span>
-    </div>
-  </div>
-
-  <div class="container" id="mainContainer" style="display: none;">
-    <!-- Rest of your attendance system content -->
-  </div>
-
-  <script>
-    // Access code (simple 4-digit code - change this to your preferred code)
-    const ACCESS_CODE = "1907";
-    let incorrectAttempts = 0;
-    let timerInterval;
-    let timeLeft = 60; // 1 minute in seconds
-    
-    // Yuvak list
-    const names = [
-  "1. Vidur M. Patel",
-  "2. Meet G. Patel",
-  "3. Tilak V. Patel",
-  "4. Priyash H. Patel",
-  "5. Krish P. Patel",
-  "6. Kirtan D. Parmar",
-  "7. Bhaumik Patel",
-  "8. Parth A. Patel",
-  "9. Maan A. Patel",
-  "10. Dhaval Parmar",
-  "11. Jaydeep K. Gohel",
-  "12. Kishan P. Patel",
-  "13. Dheeren J. Patel",
-  "14. Nil H. Bhoi",
-  "15. Dhruvil K. Patel",
-  "16. Meet S. Patel (Road)",
-  "17. Preet S. Patel",
-  "18. Jagrut J. Patel",
-  "19. Manan D. Ka.Patel",
-  "20. Joy P. Patel",
-  "21. Hari P. Ka.Patel",
-  "22. Tanmay D. Ka.Patel",
-  "23. Jay R. Patel",
-  "24. Dhirendrabhai Patel",
-  "25. Mayankbhai Patel",
-  "26. Jay Ka.Patel",
-  "27. Archik Solanki",
-  "28. Mousam Ka.Patel",
-  "29. Vivek Ka.Patel",
-  "30. Mihirbhai Patel",
-  "31. Harsh K. Patel",
-  "32. Lalitbhai A. Gohel",
-  "33. Gautambhai A. Gohel",
-  "34. Manish Prajapati",
-  "35. Tushar Rohit",
-  "36. Harsh H. Patel",
-  "37. Paath H. Patel",
-  "38. Akshay P. Patel",
-  "39. Pratik J. Patel",
-  "40. Akshar C. Patel",
-  "41. Harshil V. Patel",
-  "42. Tejash P. Patel",
-  "43. Zeel D. Patel",
-  "44. Yug P. Patel",
-  "45. Parth Chavda",
-  "46. Harsh R. Ka.Patel",
-  "47. Savan M. Patel",
-  "48. Bhavy R. Patel",
-  "49. Mantra A. Patel",
-  "50. Nishant S. Arya",
-  "51. Meet S. Patel",
-  "52. Dhaval K. Ka.Patel",
-  "53. Darshan D. Patel",
-  "54. Hiteshbhai N. Patel",
-  "55. Subhashbhai A. Patel",
-  "56. Bharatbhai Y. Patel"
-];
-
-    // Initialize the app
-    document.addEventListener("DOMContentLoaded", function() {
-      // Add the name list container to mainContainer
-      const mainContainer = document.getElementById('mainContainer');
-      mainContainer.innerHTML = `
-        <div class="search-container">
-          <input type="text" id="search" class="search-input" 
-            placeholder="Search names..." oninput="filterNames()">
-        </div>
-        <div id="nameList" class="name-list"></div>
-        <div class="summary-card">
-          <h3 class="summary-title">Attendance Summary</h3>
-          <div class="stats">
-            <div class="stat-item">
-              <span id="presentCount" class="stat-value">0</span>
-              <span class="stat-label">Present</span>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="loader">
+            <div class="mandala">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
             </div>
-            <div class="stat-item">
-              <span id="totalCount" class="stat-value">0</span>
-              <span class="stat-label">Total</span>
-            </div>
-          </div>
-          <div class="action-buttons">
-            <button class="action-btn" onclick="saveAttendance()">
-              <i class="fas fa-save"></i> Save Attendance
-            </button>
-            <button class="action-btn" onclick="exportExcel()">
-              <i class="fas fa-file-excel"></i> Export to Excel
-            </button>
-            <button class="action-btn secondary" onclick="logout()">
-              <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
-          </div>
+            <div class="loading-text">Loading</div>
         </div>
-      `;
-
-      // Clear authentication on page refresh/load
-      localStorage.removeItem('authenticated');
-      
-      // Check if timer is active from previous session
-      const lockUntil = localStorage.getItem('lockUntil');
-      if (lockUntil && new Date().getTime() < parseInt(lockUntil)) {
-        startTimer(Math.ceil((parseInt(lockUntil) - new Date().getTime()) / 1000));
-      } else {
-        const codeInput = document.getElementById('accessCode');
-        if (codeInput) {
-          codeInput.disabled = false;
-          codeInput.focus();
-          document.getElementById('submitBtn').disabled = false;
-        }
-      }
-      
-      document.getElementById('codeModal').style.display = 'block';
-      document.getElementById('mainContainer').style.display = 'none';
-    });
-
-    // Rest of the functions remain the same
-    function verifyCode() {
-      const enteredCode = document.getElementById('accessCode').value;
-      const errorElement = document.getElementById('codeError');
-      
-      if (enteredCode === ACCESS_CODE) {
-        incorrectAttempts = 0;
-        localStorage.setItem('authenticated', 'true');
-        document.getElementById('codeModal').style.display = 'none';
-        document.getElementById('mainContainer').style.display = 'block';
-        loadNames();
-      } else {
-        incorrectAttempts++;
-        
-        if (incorrectAttempts >= 3) {
-          startTimer(60);
-          const lockUntil = new Date().getTime() + 60000;
-          localStorage.setItem('lockUntil', lockUntil.toString());
-        } else {
-          errorElement.textContent = `Incorrect code. ${3 - incorrectAttempts} attempts remaining.`;
-          document.getElementById('accessCode').value = '';
-          setTimeout(() => {
-            errorElement.textContent = '';
-          }, 3000);
-        }
-      }
-    }
-
-    // Start timer function
-    function startTimer(seconds) {
-      timeLeft = seconds;
-      clearInterval(timerInterval);
-      
-      // Disable input and button
-      document.getElementById('accessCode').disabled = true;
-      document.getElementById('submitBtn').disabled = true;
-      
-      // Show timer message
-      const timerMessage = document.getElementById('timerMessage');
-      timerMessage.style.display = 'block';
-      updateTimerDisplay();
-      
-      timerInterval = setInterval(() => {
-        timeLeft--;
-        updateTimerDisplay();
-        
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          timerMessage.style.display = 'none';
-          document.getElementById('accessCode').disabled = false;
-          document.getElementById('submitBtn').disabled = false;
-          document.getElementById('accessCode').value = '';
-          document.getElementById('accessCode').focus();
-          incorrectAttempts = 0;
-          localStorage.removeItem('lockUntil');
-        }
-      }, 1000);
-    }
-    
-    // Update timer display
-    function updateTimerDisplay() {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      document.getElementById('timerMessage').textContent = 
-        `Too many attempts. Please try again in ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    }
-
-    // Logout function
-function logout() {
-  // Create modal elements
-  const modal = document.createElement('div');
-  modal.className = 'modal';
-  modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-
-  const modalContent = document.createElement('div');
-  modalContent.className = 'modal-content';
-  modalContent.style.textAlign = 'center';
-  modalContent.style.padding = '30px';
-  modalContent.style.maxWidth = '400px';
-  modalContent.style.margin = 'auto';
-  modalContent.style.marginTop = '20vh';
-
-  // Add content
-  modalContent.innerHTML = `
-    <h2 class="modal-title" style="margin-bottom: 20px;">Confirm Logout</h2>
-    <p style="margin-bottom: 25px; color: #666;">Are you sure you want to logout from the attendance system?</p>
-    <div style="display: flex; gap: 15px; justify-content: center;">
-      <button class="action-btn secondary" onclick="this.closest('.modal').remove()" style="min-width: 100px;">
-        Cancel
-      </button>
-      <button class="action-btn" onclick="confirmLogout()" style="min-width: 100px;">
-        Logout
-      </button>
     </div>
-  `;
 
-  // Add modal to page
-  modal.appendChild(modalContent);
-  document.body.appendChild(modal);
-}
-
-function confirmLogout() {
-  localStorage.removeItem('authenticated');
-  window.location.href = 'index.html';
-}
-
-    // Load names into the list
-    function loadNames() {
-      const nameList = document.getElementById("nameList");
-      nameList.innerHTML = '';
-      
-      names.forEach((name, index) => {
-        const div = document.createElement("div");
-        div.className = "person";
-        div.id = `person-${index}`;
-        div.innerHTML = `
-          <div class="person-name">${name}</div>
-          <button class="present-btn" onclick="togglePresent(${index})">
-            <i class="fas fa-check"></i> Present
-          </button>
-        `;
-        nameList.appendChild(div);
-      });
-      
-      // Update counts
-      updateSummary();
-    }
-
-    // Toggle present status
-    function togglePresent(index) {
-      const personElement = document.getElementById(`person-${index}`);
-      personElement.classList.toggle('present');
-      updateSummary();
-    }
-
-    // Update attendance summary
-    function updateSummary() {
-      const presentCount = document.querySelectorAll('.person.present').length;
-      document.getElementById('presentCount').textContent = presentCount;
-      document.getElementById('totalCount').textContent = names.length;
-    }
-
-    // Filter names based on search input
-    function filterNames() {
-      const input = document.getElementById("search").value.toLowerCase();
-      const allNames = document.querySelectorAll(".person");
-      
-      allNames.forEach(div => {
-        const name = div.querySelector('.person-name').textContent.toLowerCase();
-        div.style.display = name.includes(input) ? "flex" : "none";
-      });
-      
-      // Update counts for visible names only
-      const visiblePresent = document.querySelectorAll('.person.present[style="display: flex;"]').length;
-      const visibleTotal = document.querySelectorAll('.person[style="display: flex;"]').length;
-      document.getElementById('presentCount').textContent = visiblePresent;
-      document.getElementById('totalCount').textContent = visibleTotal;
-    }
-
-    // Save attendance to localStorage
-    function saveAttendance() {
-      const attendanceData = {};
-      document.querySelectorAll('.person.present').forEach((person, index) => {
-        attendanceData[names[index]] = true;
-      });
-      
-      // Save to localStorage
-      localStorage.setItem('attendance', JSON.stringify(attendanceData));
-      
-      // Show confirmation
-      alert(`Attendance saved successfully!\nPresent: ${Object.keys(attendanceData).length}/${names.length}`);
-    }
-
-    // Export to Excel
-    function exportExcel() {
-      const rows = [["Name", "Status"]];
-      const presentNames = [];
-      
-      document.querySelectorAll(".person").forEach((div, index) => {
-        const name = names[index];
-        const status = div.classList.contains('present') ? 'Present' : 'Absent';
-        rows.push([name, status]);
-        
-        if (status === 'Present') {
-          presentNames.push(name);
+    <style>
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
         }
-      });
 
-      // Add summary at the end
-      rows.push([""]);
-      rows.push(["Summary", ""]);
-      rows.push(["Total Present", presentNames.length]);
-      rows.push(["Total Members", names.length]);
-      rows.push(["Percentage", Math.round((presentNames.length / names.length) * 100) + "%"]);
-      rows.push([""]);
-      rows.push(["Present Members", ""]);
-      presentNames.forEach(name => rows.push([name, ""]));
+        .preloader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
 
-      const csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "attendance_" + new Date().toISOString().split('T')[0] + ".csv");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
+        .loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
 
-    // Allow pressing Enter in code input to submit
-    document.getElementById('accessCode')?.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        verifyCode();
-      }
-    });
-</script>
+        .mandala {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            animation: rotate 4s linear infinite;
+        }
 
+        .circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid transparent;
+            border-radius: 50%;
+        }
+
+        .circle:nth-child(1) {
+            border-top-color: var(--accent-gold);
+            animation: spin1 2s linear infinite;
+        }
+
+        .circle:nth-child(2) {
+            border-right-color: var(--neon-green);
+            animation: spin2 2s linear infinite;
+        }
+
+        .circle:nth-child(3) {
+            border-bottom-color: var(--neon-blue);
+            animation: spin3 2s linear infinite;
+        }
+
+        .circle:nth-child(4) {
+            border-left-color: var(--accent-amber);
+            animation: spin4 2s linear infinite;
+        }
+
+        .loading-text {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin1 {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin2 {
+            from {
+                transform: rotate(90deg);
+            }
+
+            to {
+                transform: rotate(450deg);
+            }
+        }
+
+        @keyframes spin3 {
+            from {
+                transform: rotate(180deg);
+            }
+
+            to {
+                transform: rotate(540deg);
+            }
+        }
+
+        @keyframes spin4 {
+            from {
+                transform: rotate(270deg);
+            }
+
+            to {
+                transform: rotate(630deg);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+    </style>
+
+    <script>
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.classList.add('fade-out');
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 100);
+            }, 100);
+        });
+    </script>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo-section" onclick="window.location.reload();">
+                <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Baps_logo.svg" alt="BAPS Logo"
+                    class="logo-img">
+                <div class="logo-text">
+                    <h1 style="font-size: 1.2rem;">BAPS Shri Swaminarayan Mandir</h1>
+                    <p style="font-size: 0.8rem;">Bochasan, India</p>
+                </div>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#timings">Timings</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#aarti">Aarti</a></li>
+                <li><a href="#E-Books">E-Books</a></li>
+                <li><a href="#gurus">Founder & Successors</a></li>
+                <li><a href="attendance.html" class="attendance-btn">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-slider">
+            <div class="hero-slide active">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33543/WebImages/2025_07_17_023_Bochasan.jpg"
+                    alt="Bochasan Mandir 1">
+            </div>
+            <div class="hero-slide">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33543/WebImages/2025_07_17_034_Bochasan.jpg"
+                    alt="Bochasan Mandir 2">
+            </div>
+            <div class="hero-slide">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33543/WebImages/2025_07_17_056_Bochasan.jpg"
+                    alt="Bochasan Mandir 3">
+            </div>
+            <div class="hero-slide">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30630/WebImages/2024_07_30_080_Bochasan.jpg"
+                    alt="Bochasan Mandir 4">
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+
+
+
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Events Section -->
+        <section id="events" class="section">
+            <div class="section-title">
+                <h2>Events & Divine Updates</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="cards-grid">
+                <!-- Updates Card -->
+                <div class="glass-card">
+                    <div class="card-header">
+                        <i class="fas fa-newspaper"></i>
+                        <h3>Latest Divine Updates</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="new-update-badge" style="
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+    animation: pulseAndFloat 3s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;">
+                            <div class="sparkle" style="
+        position: absolute;
+        background: white;
+        width: 100%;
+        height: 100%;
+        top: -100%;
+        left: -100%;
+        opacity: 0.2;
+        transform: rotate(45deg);
+        animation: sparkleEffect 3s ease-in-out infinite;
+    "></div>
+                            <i class="fas fa-star" style="animation: starTwinkle 1s ease-in-out infinite;"></i>
+                            New Update
+                        </div>
+
+                        <style>
+                            @keyframes pulseAndFloat {
+
+                                0%,
+                                100% {
+                                    transform: translateY(0) scale(1);
+                                    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+                                }
+
+                                50% {
+                                    transform: translateY(-5px) scale(1.05);
+                                    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+                                }
+                            }
+
+                            @keyframes sparkleEffect {
+                                0% {
+                                    top: -100%;
+                                    left: -100%;
+                                }
+
+                                50% {
+                                    top: 100%;
+                                    left: 100%;
+                                }
+
+                                100% {
+                                    top: -100%;
+                                    left: -100%;
+                                }
+                            }
+
+                            @keyframes starTwinkle {
+
+                                0%,
+                                100% {
+                                    transform: scale(1);
+                                    opacity: 1;
+                                }
+
+                                50% {
+                                    transform: scale(1.2);
+                                    opacity: 0.8;
+                                }
+                            }
+                        </style>
+                        <h3
+                            style="font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--accent-gold); margin-bottom: 1rem; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);">
+                            Pragat Brahmaswarup Mahant Swami Maharaj’s Divine Presence in Bochasan
+                        </h3>
+                        <div
+                            style="color: var(--accent-gold); font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                            📍 At BAPS Bochasan Mandir</div>
+                        <div
+                            style="color: var(--accent-gold); font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>July 5, 2025 to July 28, 2025</span>
+                        </div>
+                        <p style="color: var(--text-gray); line-height: 1.8; font-weight: 300;">
+                            Swamishri will bless the devotees with his divine presence through darshan and spiritual
+                            sabhas on selected days. Below is the complete schedule:
+                        </p>
+                        <div style="margin-bottom: 2rem;">
+                            <div class="interactive-element"
+                                style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                                <img src="dates.jpg" alt="Dates Photo"
+                                    style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Past Events Card -->
+                <div class="glass-card">
+                    <div class="card-header">
+                        <i class="fas fa-history"></i>
+                        <h3>Celebrations</h3>
+                    </div>
+                    <div class="card-content">
+                        <div style="margin-bottom: 2rem;">
+                            <h3
+                                style="font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--text-light); margin-bottom: 0.75rem;">
+                                Guru Purnima Celebration
+                            </h3>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-gray);">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>BAPS Bochasan Mandir</span>
+                            </div>
+                        </div>
+                        <!-- Event Slider -->
+                        <div class="event-slider" id="guruPurnimaSlider">
+                            <div class="event-slide active">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_034_Bochasan.jpg"
+                                    alt="Event 1">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_077_Bochasan.jpg"
+                                    alt="Event 2">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_070_Bochasan.jpg"
+                                    alt="Event 3">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_057_Bochasan.jpg"
+                                    alt="Event 4">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_052_Bochasan.jpg"
+                                    alt="Event 5">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_048_Bochasan.jpg"
+                                    alt="Event 6">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_043_Bochasan.jpg"
+                                    alt="Event 7">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30614/WebImages/2024_07_21_040_Bochasan.jpg"
+                                    alt="Event 8">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <div style="margin-bottom: 2rem;">
+                            <h3
+                                style="font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--text-light); margin-bottom: 0.75rem;">
+                                Diwali & Annakut Celebrations
+                            </h3>
+                            <div style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-gray);">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>BAPS Bochasan Mandir</span>
+                            </div>
+                        </div>
+                        <!-- Event Slider -->
+                        <div class="event-slider" id="diwaliSlider">
+                            <div class="event-slide active">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/31674/WebImages/BAPS_Diwali_New_Year_Annakut_Celebration_Bochasan_21.jpg"
+                                    alt="Event 1">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/31674/WebImages/BAPS_Diwali_New_Year_Annakut_Celebration_Bochasan_19.jpg"
+                                    alt="Event 2">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/31674/WebImages/BAPS_Diwali_New_Year_Annakut_Celebration_Bochasan_13.jpg"
+                                    alt="Event 3">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/31674/WebImages/BAPS_Diwali_New_Year_Annakut_Celebration_Bochasan_06.jpg"
+                                    alt="Event 4">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/31674/WebImages/BAPS_Diwali_New_Year_Annakut_Celebration_Bochasan_02.jpg"
+                                    alt="Event 5">
+                            </div>
+                            <div class="event-slide">
+                                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/31674/WebImages/BAPS_Diwali_New_Year_Annakut_Celebration_Bochasan_01.jpg"
+                                    alt="Event 6">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </section>
+
+        <section class="weekly-sabha-section">
+            <div class="sabha-card">
+                <div class="sabha-header">
+                    <h4 class="sabha-title">
+                        <i class="fas fa-users"></i>
+                        Weekly Sabha
+                    </h4>
+                </div>
+                <div class="sabha-details">
+                    <div class="sabha-timing">
+                        <span> Yuvak Sabha </span>
+                    </div>
+                    <p class="sabha-location"> <i class="fas fa-clock"></i> Every Saturday at 8:45 PM - Mandir Hall</p>
+                </div>
+            </div>
+        </section>
+
+        <style>
+            .weekly-sabha-section {
+                padding: 1rem;
+            }
+
+            .sabha-card {
+                background: var(--glass-bg);
+                border-radius: 15px;
+                padding: 1.5rem;
+                border: 1px solid var(--glass-border);
+                transition: all 0.3s ease;
+                position: relative;
+            }
+
+            .sabha-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+                border-color: var(--accent-gold);
+            }
+
+            .sabha-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border-radius: 15px;
+                background: var(--gradient-primary);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                z-index: -1;
+            }
+
+            .sabha-card:hover::before {
+                opacity: 0.1;
+            }
+
+            .sabha-header {
+                margin-bottom: 1rem;
+            }
+
+            .sabha-title {
+                font-weight: 600;
+                color: var(--accent-gold);
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .sabha-details {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .sabha-timing {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                color: var(--neon-blue);
+            }
+
+            .sabha-location {
+                color: var(--text-gray);
+                font-weight: 300;
+            }
+        </style>
+
+        <!-- Timings Section -->
+        <section id="timings" class="section">
+            <div class="section-title">
+                <h2>Sacred Timings</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="cards-grid">
+                <!-- Darshan Timings -->
+                <div class="timing-card">
+                    <div class="timing-card-header">
+                        <i class="fas fa-door-open"></i>
+                        <h3>Darshan Timings</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="timing-row">
+                            <span class="timing-label">Morning Darshan</span>
+                            <span class="timing-value">07:30 – 10:15 AM</span>
+                        </div>
+                        <div class="timing-row">
+                            <span class="timing-label">Rajbhog Thal</span>
+                            <span class="timing-value">10:15 – 11:15 AM (Closed)</span>
+                        </div>
+                        <div class="timing-row">
+                            <span class="timing-label">Noon Darshan</span>
+                            <span class="timing-value">11:15 – 12:00 PM</span>
+                        </div>
+                        <div class="timing-row">
+                            <span class="timing-label">Afternoon Rest</span>
+                            <span class="timing-value">12:00 – 04:00 PM (Closed)</span>
+                        </div>
+                        <div class="timing-row">
+                            <span class="timing-label">Evening Darshan</span>
+                            <span class="timing-value">04:00 – 06:00 PM</span>
+                        </div>
+                        <div class="timing-row">
+                            <span class="timing-label">Evening Thal</span>
+                            <span class="timing-value">06:00 – 07:00 PM (Closed)</span>
+                        </div>
+                        <div class="timing-row">
+                            <span class="timing-label">Night Darshan</span>
+                            <span class="timing-value">07:00 – 08:15 PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aarti Timings -->
+                <div class="timing-card">
+                    <div class="timing-card-header aarti">
+                        <i class="fas fa-bell"></i>
+                        <h3>Sacred Aarti Timings</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="timing-row">
+                            <span class="timing-label">Mangla Aarti</span>
+                            <span class="timing-value">6:00 AM</span>
+                        </div>
+                        <div class="timing-row">
+                            <span class="timing-label">Shangar Aarti</span>
+                            <span class="timing-value">7:30 AM</span>
+                        </div>
+                        <div class="timing-row">
+                            <span class="timing-label">Rajbhog Aarti</span>
+                            <span class="timing-value">11:15 AM</span>
+                        </div>
+                        <div class="timing-row">
+                            <span class="timing-label">Sandhya Aarti</span>
+                            <span class="timing-value">7:00 PM</span>
+                        </div>
+                        <div class="timing-row">
+                            <span class="timing-label">Shayan Aarti</span>
+                            <span class="timing-value">8:15 PM</span>
+                        </div>
+                    </div>
+                </div>
+                * All dates and timings may be subject to change.
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="section"></section>
+        <div class="section-title">
+            <h2>Divine Gallery</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="gallery-grid"></div>
+        <div class="gallery-grid">
+            <div class="gallery-item"
+                data-src="https://www.baps.org//Data/Sites/1/Media/LocationImages/128128-bochasan.jpg">
+                <img src="https://www.baps.org//Data/Sites/1/Media/LocationImages/128128-bochasan.jpg" alt="1">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33501/WebImages/2025_07_09_001_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33501/WebImages/2025_07_09_001_Bochasan.jpg"
+                    alt="2">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33542/WebImages/2025_07_16_001_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33542/WebImages/2025_07_16_001_Bochasan.jpg"
+                    alt="3">
+            </div>
+
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33540/WebImages/2025_07_15_001_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33540/WebImages/2025_07_15_001_Bochasan.jpg"
+                    alt="4">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_010_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_010_Bochasan.jpg"
+                    alt="5">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_001_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_001_Bochasan.jpg"
+                    alt="6">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_002_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_002_Bochasan.jpg"
+                    alt="7">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_003_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_003_Bochasan.jpg"
+                    alt="8">
+
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_005_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_005_Bochasan.jpg"
+                    alt="9">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_006_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_006_Bochasan.jpg"
+                    alt="10">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_024_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_024_Bochasan.jpg"
+                    alt="11">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_028_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_028_Bochasan.jpg"
+                    alt="12">
+            </div>
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_043_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/30641/WebImages/2024_07_31_043_Bochasan.jpg"
+                    alt="13">
+            </div>
+
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33482/WebImages/2025_07_07_022_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33482/WebImages/2025_07_07_022_Bochasan.jpg"
+                    alt="14">
+            </div>
+
+            <div class="gallery-item"
+                data-src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33544/WebImages/2025_07_18_064_Bochasan.jpg">
+                <img src="https://www.baps.org/Data/Sites/1/Media/GalleryImages/33544/WebImages/2025_07_18_064_Bochasan.jpg"
+                    alt="15">
+            </div>
+            <div class="gallery-item" data-src="https://shorturl.at/BOnqe">
+                <img src="https://shorturl.at/BOnqe" alt="16">
+            </div>
+
+        </div>
+        </section>
+
+
+        <!-- Aarti Videos Section -->
+        <section class="section aarti-section" id="aarti">
+            <div class="section-title">
+                <h2>Daily Aartis</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="cards-grid">
+                <!-- Morning Aarti Card -->
+                <div class="glass-card aarti-card">
+                    <div class="card-header">
+                        <i class="fas fa-sun"></i>
+                        <h3>Morning Aarti</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="video-container" data-video-id="6q9MD8R146c">
+                            <div class="video-overlay">
+                                <i class="fas fa-play play-icon"></i>
+                            </div>
+                            <img src="https://img.youtube.com/vi/6q9MD8R146c/maxresdefault.jpg"
+                                alt="Morning Aarti Thumbnail" class="video-thumbnail">
+                        </div>
+                        <div class="video-controls">
+                            <button class="control-btn play-pause-btn">
+                                <i class="fas fa-play"></i>
+                                <span>Play</span>
+                            </button>
+                            <div class="time-display">0:00 / 0:00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Evening Aarti Card -->
+                <div class="glass-card aarti-card">
+                    <div class="card-header">
+                        <i class="fas fa-moon"></i>
+                        <h3>Evening Aarti</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="video-container" data-video-id="zKcAHp9viBc">
+                            <div class="video-overlay">
+                                <i class="fas fa-play play-icon"></i>
+                            </div>
+                            <img src="https://img.youtube.com/vi/zKcAHp9viBc/maxresdefault.jpg"
+                                alt="Evening Aarti Thumbnail" class="video-thumbnail">
+                        </div>
+                        <div class="video-controls">
+                            <button class="control-btn play-pause-btn">
+                                <i class="fas fa-play"></i>
+                                <span>Play</span>
+                            </button>
+                            <div class="time-display">0:00 / 0:00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <style>
+            .aarti-section {
+                padding: 4rem 0;
+            }
+
+            .video-container {
+                position: relative;
+                width: 100%;
+                border-radius: 15px;
+                overflow: hidden;
+                cursor: pointer;
+                aspect-ratio: 16/9;
+            }
+
+            .video-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.4);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+            }
+
+            .video-overlay:hover {
+                background: rgba(0, 0, 0, 0.6);
+            }
+
+            .play-icon {
+                font-size: 3rem;
+                color: var(--accent-gold);
+                filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+                transition: all 0.3s ease;
+            }
+
+            .video-overlay:hover .play-icon {
+                transform: scale(1.1);
+            }
+
+            .video-thumbnail {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            .video-container:hover .video-thumbnail {
+                transform: scale(1.05);
+            }
+
+            .video-controls {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: 1rem;
+                padding: 0.5rem;
+                background: var(--glass-bg);
+                border-radius: 10px;
+                border: 1px solid var(--glass-border);
+            }
+
+            .control-btn {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.5rem 1rem;
+                background: var(--gradient-primary);
+                border: none;
+                border-radius: 5px;
+                color: var(--primary-dark);
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .control-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+            }
+
+            .time-display {
+                color: var(--text-gray);
+                font-family: monospace;
+                font-size: 0.9rem;
+            }
+
+            .aarti-card {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .aarti-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            }
+        </style>
+
+        <script>
+            // YouTube API initialization
+            let tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            let firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            let players = {};
+
+            function onYouTubeIframeAPIReady() {
+                document.querySelectorAll('.video-container').forEach(container => {
+                    const videoId = container.dataset.videoId;
+                    const playerId = `player-${videoId}`;
+
+                    // Create player div
+                    const playerDiv = document.createElement('div');
+                    playerDiv.id = playerId;
+                    container.appendChild(playerDiv);
+
+                    // Initialize player
+                    players[videoId] = new YT.Player(playerId, {
+                        videoId: videoId,
+                        playerVars: {
+                            'autoplay': 0,
+                            'controls': 0,
+                            'modestbranding': 1,
+                            'rel': 0
+                        },
+                        events: {
+                            'onStateChange': onPlayerStateChange
+                        }
+                    });
+                });
+            }
+
+            function onPlayerStateChange(event) {
+                const container = event.target.getIframe().closest('.video-container');
+                const controls = container.nextElementSibling;
+                const btn = controls.querySelector('.play-pause-btn');
+                const icon = btn.querySelector('i');
+                const text = btn.querySelector('span');
+
+                if (event.data === YT.PlayerState.PLAYING) {
+                    icon.className = 'fas fa-pause';
+                    text.textContent = 'Pause';
+                } else {
+                    icon.className = 'fas fa-play';
+                    text.textContent = 'Play';
+                }
+            }
+
+            // Add click handlers
+            document.querySelectorAll('.video-container').forEach(container => {
+                const videoId = container.dataset.videoId;
+                const controls = container.nextElementSibling;
+                const btn = controls.querySelector('.play-pause-btn');
+                const timeDisplay = controls.querySelector('.time-display');
+
+                container.addEventListener('click', () => {
+                    const player = players[videoId];
+                    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                        player.pauseVideo();
+                    } else {
+                        player.playVideo();
+                    }
+                });
+
+                btn.addEventListener('click', () => {
+                    const player = players[videoId];
+                    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                        player.pauseVideo();
+                    } else {
+                        player.playVideo();
+                    }
+                });
+
+                // Update time display
+                setInterval(() => {
+                    const player = players[videoId];
+                    if (player && player.getCurrentTime) {
+                        const current = formatTime(player.getCurrentTime());
+                        const duration = formatTime(player.getDuration());
+                        timeDisplay.textContent = `${current} / ${duration}`;
+                    }
+                }, 1000);
+            });
+
+            function formatTime(seconds) {
+                seconds = Math.floor(seconds);
+                const minutes = Math.floor(seconds / 60);
+                seconds = seconds % 60;
+                return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }
+        </script>
+
+
+
+
+
+        <main>
+            <!-- E-Books Section -->
+            <section class="section" id="E-Books">
+                <div class="section-title">
+                    <h2>E-Books</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="glass-card">
+                    <div class="card-header">
+                        <i class="fas fa-book"></i>
+                        <h3>E-Books Download</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="download-card">
+                            <img src="https://www.baps.org/Data/Sites/1/Media/DownloadableFile/Satsang_Diksha_Gujarati_1_h.jpg"
+                                alt="Satsang Diksha Book" class="book-cover">
+                            <a href="https://www.baps.org/CreateDownloads/Download.aspx?fileID=b7b193d4-d25d-48d6-a1c3-2c44de6c2184"
+                                class="download-btn" target="_blank">
+                                <i class="fas fa-download"></i>
+                                Satsang Diksha
+                            </a>
+                        </div>
+
+                        <div class="download-card">
+                            <img src="https://www.baps.org/Data/Sites/1/Media/DownloadableFile/vachanamrut_guj_h.jpg"
+                                alt="Vachanamrut Book" class="book-cover">
+                            <a href="https://www.baps.org/Data/Sites/1/Media/DownloadableFile/Vachanamrut_002.pdf"
+                                class="download-btn" target="_blank">
+                                <i class="fas fa-download"></i>
+                                Vachanamrut
+                            </a>
+                        </div>
+
+                        <div class="download-card">
+                            <img src="https://www.baps.org/Data/Sites/1/Media/DownloadableFile/swaminivato_guj_h.jpg"
+                                alt="Swamini Vato Book" class="book-cover">
+                            <a href="https://www.baps.org/Data/Sites/1/Media/DownloadableFile/Swamini_Vato_001.pdf"
+                                class="download-btn" target="_blank">
+                                <i class="fas fa-download"></i>
+                                Swamini Vato
+                            </a>
+                        </div>
+
+                        <div class="download-card">
+                            <img src="https://m.media-amazon.com/images/I/71UywQ4k1wL._SL1500_.jpg"
+                                alt="Purushottam Bolya Prite" class="book-cover">
+                            <a href="https://hsapssaustralia.org/wp-content/uploads/2023/05/Prite.pdf"
+                                class="download-btn" target="_blank">
+                                <i class="fas fa-download"></i>
+                                Purushottam Bolya Prite
+                            </a>
+                        </div>
+                    </div>
+
+                    <style>
+                        .download-card {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            text-align: center;
+                        }
+
+                        .book-cover {
+                            width: 120px;
+                            height: auto;
+                            margin-top: 2rem;
+                            margin-bottom: 1rem;
+                            border-radius: 8px;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                        }
+
+                        .download-btn {
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 0.5rem;
+                            padding: 0.5rem 1rem;
+                            background-color: #0066cc;
+                            color: white;
+                            text-decoration: none;
+                            border-radius: 4px;
+                            transition: background-color 0.3s;
+                        }
+
+                        .download-btn:hover {
+                            background-color: #0052a3;
+                        }
+                    </style>
+                </div>
+            </section>
+        </main>
+    </main>
+
+
+    <style>
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #ddd, transparent);
+            margin: 30px auto;
+            max-width: 800px;
+        }
+
+        .section-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 2rem auto;
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        /* Guru Cards Grid */
+        .guru-grid {
+            display: grid;
+            gap: 40px;
+            margin: 40px auto;
+            padding: 40px;
+            justify-content: center;
+            align-items: center;
+            max-width: 1400px;
+        }
+
+        .guru-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            max-width: auto;
+            padding: 20px;
+        }
+
+        .guru-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
+
+        .guru-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .guru-overlay {
+            position: absolute;
+            padding: 20px;
+            color: gold;
+        }
+
+        .guru-name {
+            font-size: 2rem;
+            font-weight: 700;
+            padding-top: 20px;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+            position: relative;
+            top: 100px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .guru-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+            position: relative;
+            top: 100px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .guru-details {
+            padding: 25px;
+            display: none;
+        }
+
+        .guru-card.active .guru-details {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .guru-period {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .guru-description {
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .guru-contribution {
+            background: #f8f9fa;
+            border-left: 4px solid var(--secondary);
+            padding: 12px 15px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #555;
+        }
+
+        .know-more-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: blue;
+            color: gold;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .guru-card.active .know-more-btn {
+            background: blue;
+        }
+
+
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .guru-grid {
+                gap: 30px;
+            }
+
+            .timeline-connectors {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 60px 0;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .guru-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--text-gray);
+            font-size: 1rem;
+            font-style: italic;
+        }
+    </style>
+
+    <div class="container">
+        <!-- Founder and Successors Section -->
+        <section class="section" id="gurus">
+            <div class="section-title">
+                <h2>Founder and Successors</h2>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <p class="section-description">
+                The BAPS Swaminarayan Sanstha sustains the universal value of Hindu culture—encouraging devotion
+                to God by imbibing such faith in all aspects of life.
+            </p>
+
+            <div class="guru-grid">
+
+                <!-- Bhagwan Swaminarayan -->
+                <div class="guru-card">
+                    <span style="color: #ffd700;">BHAGWAN SWAMINARAYAN</span> <br>
+                    <span style="color: #ffd700;">Founder of Swaminarayan Sampraday</span>
+                    <div class="guru-image-container">
+                        <img src="https://psm100.org/wp-content/uploads/2022/08/bhagwan-swami-img.png"
+                            alt="BHAGWAN SWAMINARAYAN" class="guru-image">
+                    </div>
+                    <div class="guru-details">
+                        <p class="guru-period">1781 - 1830</p>
+                        <p class="guru-description">Bhagwan Swaminarayan is the founder of the Swaminarayan Sampraday.
+                            He is worshipped as the supreme God by his followers. His teachings are encapsulated in the
+                            Shikshapatri and Vachanamrut.</p>
+                        <p class="guru-contribution">"In happiness and sorrow, in joy and grief, consider God as your
+                            sole refuge."</p>
+                    </div>
+                    <button class="know-more-btn">Know More</button>
+                </div>
+
+                <!-- Gunatitanand Swami -->
+                <div class="guru-card">
+                    <span style="color: #ffd700;">GUNATITANAND SWAMI</span> <br>
+                    <span style="color: #ffd700;">First Spiritual Successor</span>
+                    <div class="guru-image-container">
+                        <img src="https://psm100.org/wp-content/uploads/2022/08/aksharbrahma-img.png"
+                            alt="GUNATITANAND SWAMI" class="guru-image">
+                    </div>
+                    <div class="guru-details">
+                        <p class="guru-period">1785 - 1867</p>
+                        <p class="guru-description">Gunatitanand Swami was the first spiritual successor of Bhagwan
+                            Swaminarayan. He served as the Mahant of Junagadh mandir for 40 years and his teachings are
+                            compiled in the Swamini Vato.</p>
+                        <p class="guru-contribution">"Remain in the awareness of God and you will not fall prey to
+                            worldly temptations."</p>
+                    </div>
+                    <button class="know-more-btn">Know More</button>
+                </div>
+
+                <!-- Bhagatji Maharaj -->
+                <div class="guru-card">
+                    <span style="color: #ffd700;">BHAGATJI MAHARAJ</span> <br>
+                    <span style="color: #ffd700;">Second Spiritual Successor</span>
+                    <div class="guru-image-container">
+                        <img src="https://psm100.org/wp-content/uploads/2022/08/brahmaswarup-img.png"
+                            alt="BHAGATJI MAHARAJ" class="guru-image">
+                    </div>
+                    <div class="guru-details">
+                        <p class="guru-period">1829 - 1897</p>
+                        <p class="guru-description">Bhagatji Maharaj was the second spiritual successor in the lineage.
+                            He emphasized the importance of the Guru-disciple relationship and propagated the philosophy
+                            of Akshar-Purushottam.</p>
+                        <p class="guru-contribution">"To attain God, one must surrender to the God-realized Guru."</p>
+                    </div>
+                    <button class="know-more-btn">Know More</button>
+                </div>
+
+                <!-- Shastriji Maharaj -->
+                <div class="guru-card">
+                    <span style="color: #ffd700;">SHASTRIJI MAHARAJ</span> <br>
+                    <span style="color: #ffd700;">Third Spiritual Successor</span>
+                    <div class="guru-image-container">
+                        <img src="https://psm100.org/wp-content/uploads/2022/08/brahmaswarup-shastriji-img.png"
+                            alt="SHASTRIJI MAHARAJ" class="guru-image">
+                    </div>
+                    <div class="guru-details">
+                        <p class="guru-period">1865 - 1951</p>
+                        <p class="guru-description">Shastriji Maharaj formally established the Bochasanwasi Shri Akshar
+                            Purushottam Swaminarayan Sanstha (BAPS) in 1907. He built six magnificent mandirs and
+                            initiated 500 paramhansas.</p>
+                        <p class="guru-contribution">"The true disciple is one who obeys the commands of the Guru and
+                            God."</p>
+                    </div>
+                    <button class="know-more-btn">Know More</button>
+                </div>
+
+                <!-- Yogiji Maharaj -->
+                <div class="guru-card">
+                    <span style="color: #ffd700;">YOGIJI MAHARAJ</span> <br>
+                    <span style="color: #ffd700;">Fourth Spiritual Successor</span>
+                    <div class="guru-image-container">
+                        <img src="https://psm100.org/wp-content/uploads/2022/08/brahmaswarup-yogiji-img.png"
+                            alt="YOGIJI MAHARAJ" class="guru-image">
+                    </div>
+                    <div class="guru-details">
+                        <p class="guru-period">1892 - 1971</p>
+                        <p class="guru-description">Yogiji Maharaj was known for his boundless love and compassion. He
+                            initiated children and youth into the Swaminarayan faith and sent swamis to East Africa, UK
+                            and USA to spread the faith globally.</p>
+                        <p class="guru-contribution">"Fill your heart with love for God and hatred for no one."</p>
+                    </div>
+                    <button class="know-more-btn">Know More</button>
+                </div>
+
+                <!-- Pramukh Swami Maharaj -->
+                <div class="guru-card">
+                    <span style="color: #ffd700;">PRAMUKH SWAMI MAHARAJ</span> <br>
+                    <span style="color: #ffd700;">Fifth Spiritual Successor</span>
+                    <div class="guru-image-container">
+                        <img src="https://psm100.org/wp-content/uploads/2022/08/brahmaswarup-pramukh-img.png"
+                            alt="PRAMUKH SWAMI MAHARAJ" class="guru-image">
+                    </div>
+                    <div class="guru-details">
+                        <p class="guru-period">1921 - 2016</p>
+                        <p class="guru-description">Pramukh Swami Maharaj was the fifth spiritual successor who
+                            transformed BAPS into a global organization. Under his leadership, over 1,100 temples were
+                            built worldwide, including the Akshardham complexes.</p>
+                        <p class="guru-contribution">"In the joy of others, lies our own."</p>
+                    </div>
+                    <button class="know-more-btn">Know More</button>
+                </div>
+
+                <!-- Mahant Swami Maharaj -->
+                <div class="guru-card active">
+                    <span style="color: #ffd700;">MAHANT SWAMI MAHARAJ</span> <br>
+                    <span style="color: #ffd700;">Sixth Spiritual Successor</span>
+                    <div class="guru-image-container">
+                        <img src="https://psm100.org/wp-content/uploads/2022/08/pragat-brahmaswarup-mahant.png"
+                            alt="MAHANT SWAMI MAHARAJ" class="guru-image">
+                    </div>
+                    <div class="guru-details">
+                        <p class="guru-period">1933 - Present</p>
+                        <p class="guru-description">Mahant Swami Maharaj is the present and sixth spiritual successor of
+                            Bhagwan Swaminarayan. He was ordained by Pramukh Swami Maharaj and travels extensively to
+                            inspire devotees worldwide.</p>
+                        <p class="guru-contribution">"Progress is achieved by instilling God in our lives."</p>
+                    </div>
+                    <button class="know-more-btn">Show Less</button>
+                </div>
+            </div>
+
+            <p class="footer-note">The spiritual lineage of Bhagwan Swaminarayan continues to guide millions worldwide
+            </p>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const guruCards = document.querySelectorAll('.guru-card');
+            const knowMoreButtons = document.querySelectorAll('.know-more-btn');
+
+            // Function to toggle guru details
+            function toggleDetails(card) {
+                const isActive = card.classList.contains('active');
+
+                // Close all cards first
+                guruCards.forEach(c => {
+                    c.classList.remove('active');
+                    const btn = c.querySelector('.know-more-btn');
+                    btn.textContent = 'Know More';
+                });
+
+                // If card wasn't active, open it
+                if (!isActive) {
+                    card.classList.add('active');
+                    const btn = card.querySelector('.know-more-btn');
+                    btn.textContent = 'Show Less';
+
+                    // Scroll to the card if it's not in view
+                    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+
+            // Add event listeners to buttons
+            knowMoreButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const card = this.closest('.guru-card');
+                    toggleDetails(card);
+                });
+            });
+
+            // Add event listeners to cards for mobile tap
+            guruCards.forEach(card => {
+                card.addEventListener('click', function (e) {
+                    // Only trigger on mobile or if not clicking the button
+                    if (window.innerWidth <= 768 && !e.target.closest('.know-more-btn')) {
+                        toggleDetails(this);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+
+    <!-- Advanced Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <div class="modal-controls">
+                <div class="modal-btn" id="modalFullscreen">
+                    <i class="fas fa-expand"></i>
+                </div>
+                <div class="modal-btn" id="modalDownload">
+                    <i class="fas fa-download"></i>
+                </div>
+                <div class="modal-btn" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-nav modal-prev" id="modalPrev">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="modal-nav modal-next" id="modalNext">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <img class="modal-image" id="modalImage" src="/placeholder.svg" alt="Gallery Image">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3 class="footer-title">BAPS Shri Swaminarayan Mandir, Bochasan</h3>
+            <div class="social-links">
+                <a href="https://www.facebook.com/bapsswaminarayansanstha" class="social-link">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/baps/" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/user/BAPSChannel" class="social-link">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://twitter.com/baps" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+            <p style="color: var(--text-gray); font-weight: 300; line-height: 1.6;">
+                © 1999-2025 Bochasanwasi Shri Akshar Purushottam Swaminarayan Sanstha (BAPS Swaminarayan
+                Sanstha).<br>
+                All Rights Reserved. | Designed with Divine Inspiration
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Create Floating Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        // Close mobile menu when clicking on links
+        navLinks.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                navLinks.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // Hero Slider
+        let currentHeroSlide = 0;
+        const heroSlides = document.querySelectorAll('.hero-slide');
+
+        function showHeroSlide(index) {
+            heroSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextHeroSlide() {
+            currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+            showHeroSlide(currentHeroSlide);
+        }
+
+        // Auto-advance hero slider
+        setInterval(nextHeroSlide, 6000);
+
+        // Diwali Event Slider
+        let currentDiwaliSlide = 0;
+        const diwaliSlides = document.querySelectorAll('#diwaliSlider .event-slide');
+
+        function showDiwaliSlide(index) {
+            diwaliSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextDiwaliSlide() {
+            currentDiwaliSlide = (currentDiwaliSlide + 1) % diwaliSlides.length;
+            showDiwaliSlide(currentDiwaliSlide);
+        }
+
+        // Auto-advance Diwali slider
+        setInterval(nextDiwaliSlide, 4000);
+
+        // Guru Purnima Event Slider
+        let currentGuruPurnimaSlide = 0;
+        const guruPurnimaSlides = document.querySelectorAll('#guruPurnimaSlider .event-slide');
+
+        function showGuruPurnimaSlide(index) {
+            guruPurnimaSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextGuruPurnimaSlide() {
+            currentGuruPurnimaSlide = (currentGuruPurnimaSlide + 1) % guruPurnimaSlides.length;
+            showGuruPurnimaSlide(currentGuruPurnimaSlide);
+        }
+
+        // Auto-advance Guru Purnima slider with a slightly different interval to create visual variety
+        setInterval(nextGuruPurnimaSlide, 4500);
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Gallery Modal
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalClose = document.getElementById('modalClose');
+        const modalPrev = document.getElementById('modalPrev');
+        const modalNext = document.getElementById('modalNext');
+        const modalFullscreen = document.getElementById('modalFullscreen');
+        const modalDownload = document.getElementById('modalDownload');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        let currentImageIndex = 0;
+        const galleryImages = Array.from(galleryItems).map(item => item.dataset.src);
+
+        function openModal(index) {
+            currentImageIndex = index;
+            modalImage.src = galleryImages[index];
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function navigateImage(direction) {
+            currentImageIndex = (currentImageIndex + direction + galleryImages.length) % galleryImages.length;
+            modalImage.src = galleryImages[currentImageIndex];
+        }
+
+        // Gallery click handlers
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => openModal(index));
+        });
+
+        // Modal controls
+        modalClose.addEventListener('click', closeModal);
+        modalPrev.addEventListener('click', () => navigateImage(-1));
+        modalNext.addEventListener('click', () => navigateImage(1));
+
+        // Fullscreen functionality
+        modalFullscreen.addEventListener('click', () => {
+            if (modalImage.requestFullscreen) {
+                modalImage.requestFullscreen();
+            }
+        });
+
+        // Download functionality
+        modalDownload.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.href = galleryImages[currentImageIndex];
+            link.download = `baps-bochasan-${currentImageIndex + 1}.jpg`;
+            link.click();
+        });
+
+        // Close modal when clicking outside image
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (modal.classList.contains('active')) {
+                if (e.key === 'Escape') closeModal();
+                if (e.key === 'ArrowLeft') navigateImage(-1);
+                if (e.key === 'ArrowRight') navigateImage(1);
+                if (e.key === 'f' || e.key === 'F') modalFullscreen.click();
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Initialize particles
+        createParticles();
+
+        // Add some interactive sound effects (optional)
+        function playClickSound() {
+            // You can add audio elements here for click sounds
+        }
+
+        // Add click sound to interactive elements
+        document.querySelectorAll('.interactive-element, .cta-btn, .glass-card').forEach(element => {
+            element.addEventListener('click', playClickSound);
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroSlides = document.querySelectorAll('.hero-slide img');
+            heroSlides.forEach(slide => {
+                slide.style.transform = `translateY(${scrolled * 0.5}px)`;
+            });
+        });
+
+        // Add typing effect to hero title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+    </script>
+
+    <script>
+        // Ensure page loads from top when refreshed
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        }
+    </script>
 </body>
 
 </html>
